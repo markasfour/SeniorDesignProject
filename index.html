@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	
+	<title>Senior Design Project</title>
+	<link href="main.css" rel="stylesheet"/>
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+	<!--MAP-->
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	
+  <script>
+  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	  ga('create', 'UA-75696203-1', 'auto');
+  	  ga('send', 'pageview');
+	</script>
+</head>
+
+<body>
+	<!--LOGO-->
+	<div id="logo" align="center">Senior Design Project</div>
+
+	<!--MAP-->
+	<div id="mapid"></div>
+
+	<script>
+		var maxBounds = L.latLngBounds(
+			L.latLng(5.499550, -167.276413), //Southwest
+    		L.latLng(83.162102, -52.233040)  //Northeast
+		);	
+		
+		var map = L.map('mapid', {
+						'center': [0, 0],
+						'zoom': 0,
+						'maxBounds': maxBounds
+						}).fitBounds(maxBounds);
+    	
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    	}).addTo(map);
+
+		</script>
+
+
+	<!--FOOTER-->
+	<div id="footer">
+		<p id="footer"><i class="fa fa-copyright"></i> 2016 Mark Asfour, Mehran Ghamaty, Jacob Xu</p>
+	</div>
+</body>
+</html>
