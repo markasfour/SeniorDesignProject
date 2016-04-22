@@ -24,8 +24,7 @@
 </head>
 
 <body>
-	<!--LOGO-->
-	<div id="logo" align="center">Senior Design Project</div>
+	
 
 	<!--MAP-->
 	<div id="mapid"></div>
@@ -42,16 +41,18 @@
 						'maxBounds': maxBounds
 						}).fitBounds(maxBounds);
     	
-		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     	}).addTo(map);
 
-		</script>
+	</script>
 
+	<!--LOGO-->
+	<div id="logo" align="center">Senior Design Project</div>
 
 	<!--FOOTER-->
 	<div id="footer">
-		<p id="footer"><i class="fa fa-copyright"></i> 2016 Mark Asfour, Mehran Ghamaty, Jacob Xu</p>
+		<i class="fa fa-copyright"></i> 2016 Mark Asfour, Mehran Ghamaty, Jacob Xu
 	</div>
 </body>
 </html>
