@@ -4,7 +4,7 @@ body {
 	padding: 0;
 	font-family: 'Ubuntu', sans-serif;
 	color: #FFFFFF;
-	text-shadow: 0 0 1px #FFFFFF;
+	
 }
 
 #mapid {
@@ -19,6 +19,7 @@ body {
 	padding: 15px;
 	margin: 0 auto;
 	font-size: 40px;
+	text-shadow: 0 0 3px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8);
 	position: absolute;
 }
@@ -30,6 +31,7 @@ body {
 	text-align: center;
 	margin: 0 auto;
 	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8); 
 	position: fixed;
 }
