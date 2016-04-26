@@ -5,7 +5,7 @@ var maxBounds = L.latLngBounds(
 );	
 
 var map = L.map('mapid', {
-				'center': [0, 0],
+				//'center': [0, 0],
 				'zoom': 0,
 				'maxBounds': maxBounds
 				}).fitBounds(maxBounds);
