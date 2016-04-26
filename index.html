@@ -8,6 +8,7 @@
 	<link href="main.css" rel="stylesheet"/>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
 
 	<!--MAP-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
@@ -34,9 +35,18 @@
 
 	<!--LOGO-->
 	<div id="logo" align="center">Senior Design Project</div>
-
+	
+	<!--CUSTOMIZE BUTTON-->
+	<div id="icon-customize">
+        <i class="fa fa-bars"></i>
+        Customize 
+    </div>
 	<!--CUSTOMIZATION PANEL-->
+	
 	<div id="left-panel">
+		<div id="icon-close">
+			<i class="fa fa-close"></i>
+		</div>
 		Customize Options
 		<hr>
 		Change Map Style
@@ -48,12 +58,13 @@
 			<input type="radio" name="map" value="nighttime"> Night Time 
 		</form>
 		<hr>
-		
 	</div>
-
+	
 	<!--FOOTER-->
 	<div id="footer">
 		<i class="fa fa-copyright"></i> 2016 Mark Asfour, Mehran Ghamaty, Jacob Xu
 	</div>
+	
+	<script type="text/javascript" src="customize_menu_move.js"></script>
 </body>
 </html>

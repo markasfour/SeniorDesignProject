@@ -24,9 +24,23 @@ body {
 	position: fixed;
 }
 
+#icon-customize {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 70px 5px 0;
+	padding: 5px;
+	left: 0px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	position: fixed;
+	background-color: #517fa4;
+	border-radius: 2px;
+}
+
 #left-panel {
-	/*width: 300px;*/
+	width: 300px;
 	height: 100%;
+	left: -320px;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
 	margin: 65px 0; 
 	padding: 5px 15px 5px 5px;
@@ -34,6 +48,15 @@ body {
 	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(81, 127, 164, 0.8);
 	position: fixed;
+}
+
+#icon-close {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 5px 0;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	text-align: right;
 }
 
 #footer {
