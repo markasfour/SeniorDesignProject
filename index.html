@@ -35,6 +35,22 @@
 	<!--LOGO-->
 	<div id="logo" align="center">Senior Design Project</div>
 
+	<!--CUSTOMIZATION PANEL-->
+	<div id="left-panel">
+		Customize Options
+		<hr>
+		Change Map Style
+		<form name="map_types" onChange="changeMapType(map_types)">
+			<input type="radio" name="map" value="default" checked> Default<br>
+  	  	  	<input type="radio" name="map" value="terrain"> Terrain<br>
+  	  	  	<input type="radio" name="map" value="dark"> Dark<br> 
+  	  	  	<input type="radio" name="map" value="grayscale"> Grayscale<br>
+			<input type="radio" name="map" value="nighttime"> Night Time 
+		</form>
+		<hr>
+		
+	</div>
+
 	<!--FOOTER-->
 	<div id="footer">
 		<i class="fa fa-copyright"></i> 2016 Mark Asfour, Mehran Ghamaty, Jacob Xu

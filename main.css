@@ -18,20 +18,39 @@ body {
 	width: 100%;
 	padding: 15px;
 	margin: 0 auto;
-	font-size: 40px;
+	font-size: 30px;
 	text-shadow: 0 0 3px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8);
-	position: absolute;
+	position: fixed;
+}
+
+#left-panel {
+	/*width: 300px;*/
+	height: 100%;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 65px 0; 
+	padding: 5px 15px 5px 5px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	background-color: rgba(81, 127, 164, 0.8);
+	position: fixed;
 }
 
 #footer {
 	width: 100%;
 	bottom: 0;
-	padding: 15px;
+	padding: 5px 0 30px;
 	text-align: center;
 	margin: 0 auto;
 	font-size: 16px;
 	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8); 
 	position: fixed;
+}
+
+hr {
+	border: 0;
+	width: 90%;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
