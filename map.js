@@ -52,6 +52,7 @@ var night_map = L.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/VII
 var map_list = [default_map, terrain_map, dark_map, grayscale_map, night_map];
 var cur_map = 0;
 
+//CUSTOMIZE MAP TYPE
 function setMapType(map_type) {
 	map.removeLayer(map_list[cur_map]);
 	if (map_type === 'default')  {
@@ -156,9 +157,41 @@ function onEachFeature(feature, layer) {
 	});
 }
 
-geojson = L.geoJson(statesData, {
+//LOAD ALL DATA TYPES
+//load states data
+var states_data = L.geoJson(statesData, {
 	style: style,
 	onEachFeature: onEachFeature
-}).addTo(map);
+});
+
+//load metropolitan_data
+var metropolitan_data = L.geoJson(metropolitanData, {
+	style: style,
+	onEachFeature: onEachFeature
+});
+
+var data_list = [states_data, metropolitan_data];
+var cur_data = 0;
+
+//initialize to states data
+geojson = data_list[cur_data].addTo(map);
+
+//CUSTOMIZE DATA TYPES
+function setDataType(data_type) {
+	map.removeLayer(data_list[cur_data]);
+	if (data_type === 'States')  {
+		cur_data = 0;
+	}
+	else if (data_type === 'Metropolitan') {
+		cur_data = 1;
+	}
+	geojson = data_list[cur_data].addTo(map);
+}
+
+function changeDataType(data_types){
+	var data_type = data_types.data.value;
+	setDataType(data_type);
+}
+
 
 map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
