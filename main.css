@@ -50,13 +50,48 @@ body {
 	position: fixed;
 }
 
-#icon-close {
+#icon-close-left {
 	cursor: pointer;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
 	margin: 5px 0;
 	font-size: 16px;
 	text-shadow: 0 0 1px #000000;
 	text-align: right;
+}
+
+#icon-trends {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 70px 5px 0;
+	padding: 5px;
+	right: -320px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	position: fixed;
+	background-color: #517fa4;
+	border-radius: 2px;
+}
+
+#right-panel {
+	width: 300px;
+	height: 100%;
+	right: 0px;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 65px 0; 
+	padding: 5px 15px 5px 5px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	background-color: rgba(81, 127, 164, 0.8);
+	position: fixed;
+}
+
+#icon-close-right {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 5px 0;
+	font-size: 16px;
+	text-shadow: 0 0 1px #000000;
+	text-align: left;
 }
 
 #footer {

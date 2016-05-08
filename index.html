@@ -9,6 +9,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="angular.min.js"></script>
 
 	<!--MAP-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
@@ -41,10 +42,10 @@
         <i class="fa fa-bars"></i>
         Customize 
     </div>
-	<!--CUSTOMIZATION PANEL-->
 	
+	<!--CUSTOMIZATION PANEL-->
 	<div id="left-panel">
-		<div id="icon-close">
+		<div id="icon-close-left">
 			<i class="fa fa-close"></i>
 		</div>
 		Customize Options
@@ -58,20 +59,43 @@
 			<input type="radio" name="map" value="nighttime"> Night Time 
 		</form>
 		<hr>
-		
+		<!--	
 		Change Data Formatting
 		<form name="data_types" onChange="changeDataType(data_types)">
 			<input type="radio" name="data" value="States" checked> States<br>
   	  	  	<input type="radio" name="data" value="Metropolitan"> Metropolitan<br>
 		</form>
 		<hr>
+		-->
 	</div>
-	
+
+	<!--TRENDS BUTTON-->
+	<div id="icon-trends">
+        <i class="fa fa-line-chart" aria-hidden="true"></i>
+        Trends 
+    </div>
+
+	<!--TRENDS PANEL-->
+	<div id="right-panel">
+		<div id="icon-close-right">
+			<i class="fa fa-close"></i>
+		</div>
+		<i class="fa fa-line-chart" aria-hidden="true"></i> Trends
+		<table style="width: 100%;">
+			<tr style="margin: 0 auto; text-align: center;">
+				<td><i class="fa fa-twitter" aria-hidden="true"></i></td>
+				<td><i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-fire" aria-hidden="true"></i></td>
+				<td><i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i></td>
+			</tr>
+		</table>
+	</div>
+
 	<!--FOOTER-->
 	<div id="footer">
 		<i class="fa fa-copyright"></i> 2016 Mark Asfour, Mehran Ghamaty, Jacob Xu
 	</div>
 	
 	<script type="text/javascript" src="customize_menu_move.js"></script>
+	<script type="text/javascript" src="trends_menu_move.js"></script>
 </body>
 </html>

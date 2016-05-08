@@ -7,6 +7,7 @@ var maxBounds = L.latLngBounds(
 var map = L.map('mapid', {
 				'center': [0, 0],
 				'zoom': 0,
+				'zoomControl' : false,
 				//'maxBounds': maxBounds
 				}).fitBounds(maxBounds);
 
@@ -95,7 +96,7 @@ info.update = function (props) {
 		: 'Hover over a state');
 };
 
-info.addTo(map);
+//info.addTo(map);
 
 
 // get color depending on population density value
@@ -192,6 +193,5 @@ function changeDataType(data_types){
 	var data_type = data_types.data.value;
 	setDataType(data_type);
 }
-
 
 map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
