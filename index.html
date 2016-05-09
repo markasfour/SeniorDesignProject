@@ -37,7 +37,7 @@
 	</script>
 </head>
 
-<body ng-app="tweetheat" ng-controller="heat-controller">
+<body ng-app="tweetheat">
 	
 
 	<!--MAP-->
@@ -103,12 +103,14 @@
 				<hr>
 			</th></tr>
 			<tr><td>
-				<form name="Twitter_Trends">
-				<input type="checkbox" name="1" value="1" checked> Trend 1<br>
+				<form name="Twitter_Trends" ng-controller="twitterController">
+          <input ng-repeat="keyword in twitterKeywords" name=""> {{keyword}} <br>
+				<!--<input type="checkbox" name="1" value="1" checked> Trend 1<br>
   	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
   	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
   	  	  		<input type="checkbox" name="4" value="4" checked> Trend 4<br>
-				<input type="checkbox" name="5" value="5" checked> Trend 5
+        <input type="checkbox" name="5" value="5" checked> Trend 5 -->
+
 				</form>
 			</td></tr>
 		</table>
@@ -131,20 +133,22 @@
 			</th></tr>
 
 			<tr><td>
-				<form name="Hot_Trends">
-				<input type="checkbox" name="1" value="1" checked> Trend 1<br>
+				<form name="Hot_Trends" ng-controller="googleHotController">
+              <input ng-repeat="keyword in googleHotKeywords" name=""> {{keyword}} <br>
+				      <!--<input type="checkbox" name="1" value="1" checked> Trend 1<br>
   	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
   	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
   	  	  		<input type="checkbox" name="4" value="4" checked> Trend 4<br>
-				<input type="checkbox" name="5" value="5" checked> Trend 5
+              <input type="checkbox" name="5" value="5" checked> Trend 5 -->
 				</form>
 				<td>
-				<form name="Search_Trends">
-				<input type="checkbox" name="1" value="1" checked> Trend 1<br>
+				<form name="Search_Trends" ng-controller="googleSearchController">
+              <input ng-repeat="keyword in googleSearchKeywords" name=""> {{keyword}} <br>
+				      <!-- <input type="checkbox" name="1" value="1" checked> Trend 1<br>
   	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
   	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
   	  	  		<input type="checkbox" name="4" value="4" checked> Trend 4<br>
-				<input type="checkbox" name="5" value="5" checked> Trend 5
+              <input type="checkbox" name="5" value="5" checked> Trend 5 -->
 				</form>
 			</td></tr>
 		</table>

@@ -65,26 +65,40 @@ tweetheat.factory('heatFactory', function(){
 
 });
 
-
-tweetheat.controller('heatController', ['$scope', '$http', '$q', 'heatFactory', 
+tweetheat.controller('twitterController', ['$scope', '$http', '$q', 'heatFactory', 
                                         function($scope,$http,$q, heatFactry){
   $scope.twitterKeywords      = [];
-  $scope.googleHotKeywords    = [];
-  $scope.googleSearchKeywords = [];
 
   var requestForTwitterKeywords      = heatFactory.getTwitterKeywords($http);
-  var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords($http);
-  var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
 
-  requestForTwitterKeywords.then( function(result) {
-    console.log(result);
-  });
-  requestForTwitterKeywords.then( function(result) {
-    console.log(result);
-  });
   requestForTwitterKeywords.then( function(result) {
     console.log(result);
   });
 
 }]);
+
+tweetheat.controller('googleHotController', ['$scope', '$http', '$q', 'heatFactory', 
+                                        function($scope,$http,$q, heatFactry){
+  $scope.googleHotKeywords    = [];
+
+  var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords($http);
+
+  requestForTwitterKeywords.then( function(result) {
+    console.log(result);
+  });
+}]);
+
+tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFactory', 
+                                        function($scope,$http,$q, heatFactry){
+  $scope.googleSearchKeywords = [];
+
+  var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
+
+  requestForTwitterKeywords.then( function(result) {
+    console.log(result);
+  });
+
+}]);
+
+
 
