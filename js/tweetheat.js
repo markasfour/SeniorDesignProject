@@ -83,7 +83,7 @@ tweetheat.controller('googleHotController', ['$scope', '$http', '$q', 'heatFacto
 
   var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords($http);
 
-  requestForTwitterKeywords.then( function(result) {
+  requestForGoogleHotKeywords.then( function(result) {
     console.log(result);
   });
 }]);
@@ -94,7 +94,7 @@ tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFa
 
   var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
 
-  requestForTwitterKeywords.then( function(result) {
+  requestForGoogleSearchKeywords.then( function(result) {
     console.log(result);
   });
 
