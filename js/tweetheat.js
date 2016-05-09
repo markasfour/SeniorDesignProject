@@ -66,7 +66,7 @@ tweetheat.factory('heatFactory', function(){
 });
 
 tweetheat.controller('twitterController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactry){
+                                        function($scope,$http,$q, heatFactory){
   $scope.twitterKeywords      = [];
 
   var requestForTwitterKeywords      = heatFactory.getTwitterKeywords($http);
@@ -78,7 +78,7 @@ tweetheat.controller('twitterController', ['$scope', '$http', '$q', 'heatFactory
 }]);
 
 tweetheat.controller('googleHotController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactry){
+                                        function($scope,$http,$q, heatFactory){
   $scope.googleHotKeywords    = [];
 
   var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords($http);
@@ -89,7 +89,7 @@ tweetheat.controller('googleHotController', ['$scope', '$http', '$q', 'heatFacto
 }]);
 
 tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactry){
+                                        function($scope,$http,$q, heatFactory){
   $scope.googleSearchKeywords = [];
 
   var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
