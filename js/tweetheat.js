@@ -1,7 +1,9 @@
-var keywordURL = "https://ghamaty.tech:5000/maprest/apv1/get/keywords"
+var keywordURL = "http://ghamaty.tech:5000/maprest/apv1/get/keywords"
 var twitterURL = keywordURL + "/twitter"
 var googleHotURL = keywordURL + "/google/search"
 var googleSearchURL = keywordURL + "/google/hot"
+
+console.log("urls are ", twitterURL, googleHotURL, googleSearchURL)
 
 
 var tweetheat = angular.module('tweetheat', ['ngAnimate']);
@@ -15,11 +17,11 @@ tweetheat.run(function($rootScope) {
 tweetheat.factory('heatFactory', function(){
   //used to get the keywords
   function getKeywords( $http){
+    console.log("getting from ", keywordURL);
     var url = keywordURL;  
     return $http({
       method: 'GET',
       url: url,
-      dataType: 'jsonp',
       headers: {'Accept': 'application/json'}
     }).then(function (result) {
       return result.data;
