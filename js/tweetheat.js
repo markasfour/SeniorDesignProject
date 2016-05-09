@@ -8,7 +8,7 @@ var tweetheat = angular.module('tweetheat', ['ngAnimate']);
 
 tweetheat.factory('heatFactory', function(){
   //used to get the keywords
-  function getKeywords(){
+  function getKeywords( $http){
     var url = keywordURL;  
     return $http({
       method: 'GET',
@@ -20,7 +20,7 @@ tweetheat.factory('heatFactory', function(){
     });
   }
 
-  function getTwitterKeywords(){
+  function getTwitterKeywords($http){
     var url = twitterURL;  
     return $http({
       method: 'GET',
@@ -32,7 +32,7 @@ tweetheat.factory('heatFactory', function(){
     });
   }
 
-  function getGoogleHotKeywords(){
+  function getGoogleHotKeywords($http){
     var url = googleHotURL;  
     return $http({
       method: 'GET',
@@ -44,7 +44,7 @@ tweetheat.factory('heatFactory', function(){
     });
   }
 
-  function getGoogleSearchKeywords(){
+  function getGoogleSearchKeywords($http){
     var url = googleSearchURL;  
     return $http({
       method: 'GET',
@@ -72,9 +72,9 @@ tweetheat.controller('heatController', ['$scope', '$http', '$q', 'heatFactory',
   $scope.googleHotKeywords    = [];
   $scope.googleSearchKeywords = [];
 
-  var requestForTwitterKeywords      = heatFactory.getTwitterKeywords();
-  var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords();
-  var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords();
+  var requestForTwitterKeywords      = heatFactory.getTwitterKeywords($http);
+  var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords($http);
+  var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
 
   requestForTwitterKeywords.then( function(result) {
     console.log(result);
