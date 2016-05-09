@@ -1,0 +1,114 @@
+body {
+	height: 100%;
+	left: 0px;
+	margin: 0;
+	padding: 0;
+	font-family: 'Ubuntu', sans-serif;
+	color: #FFFFFF;
+}
+
+#mapid {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	position: absolute;
+}
+
+#logo {
+	width: 100%;
+	padding: 15px;
+	margin: 0 auto;
+	font-size: 30px;
+	text-shadow: 0 0 3px #FFFFFF;
+	background-color: rgba(0, 172, 237, 0.8);
+	position: fixed;
+}
+
+#icon-customize {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 70px 5px 0;
+	padding: 5px;
+	left: 0px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	position: fixed;
+	background-color: #517fa4;
+	border-radius: 2px;
+}
+
+#left-panel {
+	width: 300px;
+	height: 100%;
+	left: -320px;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 65px 0; 
+	padding: 5px 15px 5px 5px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	background-color: rgba(81, 127, 164, 0.8);
+	position: fixed;
+}
+
+#icon-close-left {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 5px 0;
+	font-size: 16px;
+	text-shadow: 0 0 1px #000000;
+	text-align: right;
+}
+
+#icon-trends {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 70px 5px 0;
+	padding: 5px;
+	right: -320px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	position: fixed;
+	background-color: #517fa4;
+	border-radius: 2px;
+}
+
+#right-panel {
+	width: 300px;
+	height: 100%;
+	right: 0px;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 65px 0; 
+	padding: 5px 15px 5px 5px;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	background-color: rgba(81, 127, 164, 0.8);
+	position: fixed;
+}
+
+#icon-close-right {
+	cursor: pointer;
+	/*away from top by size of text + 2*shadow size + 2*padding*/
+	margin: 5px 0;
+	font-size: 16px;
+	text-shadow: 0 0 1px #000000;
+	text-align: left;
+}
+
+#footer {
+	width: 100%;
+	bottom: 0;
+	padding: 5px 0 30px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 16px;
+	text-shadow: 0 0 1px #FFFFFF;
+	background-color: rgba(0, 172, 237, 0.8); 
+	position: fixed;
+}
+
+hr {
+	border: 0;
+	width: 90%;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}

@@ -5,17 +5,23 @@
 	<meta content="utf-8" http-equiv="encoding">
 	
 	<title>Senior Design Project</title>
-	<link href="main.css" rel="stylesheet"/>
+	<link href="css/main.css" rel="stylesheet"/>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
-	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>\
+
+  <!-- Angular -->
+	<script type="text/javascript" src="js/angular.min.js"></script>
+  
 
 	<!--MAP-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>	
-	<script type="text/javascript" src="us-states.js"></script>	
-	<script type="text/javascript" src="metro.js"></script>	
+	<script type="text/javascript" src="js/us-states.js"></script>	
+	<script type="text/javascript" src="js/metro.js"></script>	
+	<script type="text/javascript" src="js/tweetheat.js"></script>	
+
+
 
   <script>
   	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -27,7 +33,7 @@
 	</script>
 </head>
 
-<body>
+<body ng-app="tweetheat" ng-controller="heat-controller">
 	
 
 	<!--MAP-->
