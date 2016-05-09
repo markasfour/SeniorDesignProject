@@ -1,2 +1,4 @@
-$(".about_slides").slick(
-	);
+$(".about_slides").slick({
+	dots: true,
+	infinite: true 
+	});
