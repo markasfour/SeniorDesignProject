@@ -2,6 +2,8 @@ var keywordURL = "https://ghamaty.tech:5000/maprest/apv1/get/keywords"
 var twitterURL = keywordURL + "/twitter"
 var googleHotURL = keywordURL + "/google/search"
 var googleSearchURL = keywordURL + "/google/hot"
+
+
 var tweetheat = angular.module('tweetheat', ['ngAnimate']);
 
 tweetheat.factory('heatFactory', function(){
@@ -18,7 +20,7 @@ tweetheat.factory('heatFactory', function(){
     });
   }
 
-  function getTwitter(){
+  function getTwitterKeywords(){
     var url = twitterURL;  
     return $http({
       method: 'GET',
@@ -30,8 +32,8 @@ tweetheat.factory('heatFactory', function(){
     });
   }
 
-  function getGoogleHot(){
-    var url = googleSearchURL;  
+  function getGoogleHotKeywords(){
+    var url = googleHotURL;  
     return $http({
       method: 'GET',
       url: url,
@@ -42,7 +44,7 @@ tweetheat.factory('heatFactory', function(){
     });
   }
 
-  function getGoogleSearch(){
+  function getGoogleSearchKeywords(){
     var url = googleSearchURL;  
     return $http({
       method: 'GET',
@@ -55,7 +57,10 @@ tweetheat.factory('heatFactory', function(){
   }
 
   return {
-    getKeywords:getKeywords
+    getKeywords:getKeywords,
+    getTwitterKeywords:getTwitterKeywords,
+    getGoogleSearchKeywords:getGoogleSearchKeywords,
+    getGoogleHotKeywords:getGoogleHotKeywords
   }
 
 });
@@ -63,13 +68,23 @@ tweetheat.factory('heatFactory', function(){
 
 tweetheat.controller('heatController', ['$scope', '$http', '$q', 'heatFactory', 
                                         function($scope,$http,$q, heatFactry){
+  $scope.twitterKeywords      = [];
+  $scope.googleHotKeywords    = [];
+  $scope.googleSearchKeywords = [];
 
-  $scope.keywords = "";
-  $scope.keywordList = [];
-  
-  var requestForKeywords = heatFactory.getKeywords();
-  requestForKeywords.then( function(result) {
+  var requestForTwitterKeywords      = heatFactory.getTwitterKeywords();
+  var requestForGoogleHotKeywords    = heatFactory.getGoogleHotKeywords();
+  var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords();
+
+  requestForTwitterKeywords.then( function(result) {
     console.log(result);
   });
+  requestForTwitterKeywords.then( function(result) {
+    console.log(result);
+  });
+  requestForTwitterKeywords.then( function(result) {
+    console.log(result);
+  });
+
 }]);
 
