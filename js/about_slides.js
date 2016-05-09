@@ -1,0 +1,2 @@
+$(".about_slides").slick(
+	);

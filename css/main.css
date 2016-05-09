@@ -137,6 +137,12 @@ body {
 	text-align: right;
 }
 
+#about_container {
+	width: 85%;
+	height: 85%;
+	margin: 0 auto;
+}
+
 hr {
 	border: 0;
 	width: 90%;
