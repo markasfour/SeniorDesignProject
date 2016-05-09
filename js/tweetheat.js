@@ -6,6 +6,12 @@ var googleSearchURL = keywordURL + "/google/hot"
 
 var tweetheat = angular.module('tweetheat', ['ngAnimate']);
 
+tweetheat.run(function($rootScope) {
+  $rootScope.print = function(toPrint) {
+    console.log(toPrint);
+  }
+});
+
 tweetheat.factory('heatFactory', function(){
   //used to get the keywords
   function getKeywords( $http){
@@ -94,7 +100,9 @@ tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFa
 
   var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
   console.log("inside search controller")
+  $scope.print("test")
   requestForGoogleSearchKeywords.then( function(result) {
+    $scope.print(result)
     console.log(result);
   });
 
