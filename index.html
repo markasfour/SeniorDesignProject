@@ -106,7 +106,7 @@
 			</th></tr>
 			<tr><td>
 				<form name="Twitter_Trends" ng-controller="twitterController">
-          <input ng-repeat="keyword in twitterKeywords" name=""> {{keyword}} <br>
+					<li ng-repeat="keyword in twitterKeywords"><input type="checkbox" name=""> {{keyword.name}} </li>
 				<!--<input type="checkbox" name="1" value="1" checked> Trend 1<br>
   	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
   	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
@@ -136,7 +136,7 @@
 
 			<tr><td>
 				<form name="Hot_Trends" ng-controller="googleHotController">
-              <input ng-repeat="keyword in googleHotKeywords" name=""> {{keyword}} <br>
+              <li ng-repeat="keyword in googleHotKeywords"><input type="checkbox" name=""> {{keyword}} </li>
 				      <!--<input type="checkbox" name="1" value="1" checked> Trend 1<br>
   	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
   	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
@@ -145,7 +145,7 @@
 				</form>
 				<td>
 				<form name="Search_Trends" ng-controller="googleSearchController">
-              <input ng-repeat="keyword in googleSearchKeywords" name=""> {{keyword}} <br>
+              <li ng-repeat="keyword in googleSearchKeywords"><input type="checkbox" name=""> {{keyword}} </li>
 				      <!-- <input type="checkbox" name="1" value="1" checked> Trend 1<br>
   	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
   	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
@@ -168,7 +168,7 @@
 					<div>
 						<p style="font-size: 30px; text-align: center"><b>What is GTWENDS</b></p>
 						<p>GTWENDS is an interactive map of Google and Twitter trends.</p>
-						<p>Used technologies:</p>
+						<p>Overview of technologies used:</p>
 						<i><ul>
 							<li>Web crawling</li>
 							<li>Twitter API</li>
