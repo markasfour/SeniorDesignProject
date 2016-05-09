@@ -99,11 +99,11 @@ tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFa
   $scope.googleSearchKeywords = [];
 
   var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
-  console.log("inside search controller")
-  $scope.print("test")
+  console.log("inside search controller");
+  $scope.print("test");
   requestForGoogleSearchKeywords.then( function(result) {
-    $scope.print(result)
-    console.log(result);
+    $scope.print(result);
+    console.log("googlesearch keywords are ", result);
   });
 
 }]);
