@@ -1,7 +1,7 @@
 var about_move = function() {
     $('#icon-about').click(function()
     {
-        $('#about').animate({left: '0%'}, 200);
+		$('#about').animate({left: '0%'}, 200);
     });
     
     $('#icon-close-about').click(function()
