@@ -1,4 +1,4 @@
-var keywordURL = "http://ghamaty.tech:5000/maprest/apv1/get/keywords"
+var keywordURL = "https://ghamaty.tech/maprest/apv1/get/keywords"
 var twitterURL = keywordURL + "/twitter"
 var googleHotURL = keywordURL + "/google/search"
 var googleSearchURL = keywordURL + "/google/hot"
