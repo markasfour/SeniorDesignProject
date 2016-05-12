@@ -73,7 +73,7 @@ function changeColorScheme(color_scheme){
 		r2 = 255; 
 		g2 = 167;
 		b2 = 0;
-		a2 = .8;
+		a2 = 1;
 		
 		r3 = 0;
 		g3 = 135;
@@ -83,7 +83,7 @@ function changeColorScheme(color_scheme){
 		r4 = 0; 
 		g4 = 87;
 		b4 = 231;
-		a4 = .8;
+		a4 = 1;
 	}
 
 	document.getElementById("logo").style.backgroundColor = 'rgb(' + r1 + ',' + g1 + ',' + b1 + ')';	
@@ -100,7 +100,7 @@ function changeColorScheme(color_scheme){
 
 	document.getElementById("icon-customize").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
 
-	document.getElementById("icon-trends").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
+	document.getElementById("icon-trends").style.backgroundColor = 'rgb(' + r4 + ',' + g4 + ',' + b4 + ')';
 
 	document.getElementById("icon-about").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
 
