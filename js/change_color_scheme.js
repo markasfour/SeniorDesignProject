@@ -1,3 +1,12 @@
+//function to change element's alpha
+HTMLElement.prototype.alpha = function(a) {
+        current_color = getComputedStyle(this).getPropertyValue("background-color");
+        match = /rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*\d+[\.\d+]*)*\)/g.exec(current_color)
+        a = a > 1 ? (a / 100) : a;
+        this.style.backgroundColor = "rgba(" + [match[1],match[2],match[3],a].join(',') +")";
+}
+
+//change color scheme customization 
 function changeColorScheme(color_scheme){
 	var value = color_scheme.colors.value;
 	
@@ -87,16 +96,16 @@ function changeColorScheme(color_scheme){
 	}
 
 	document.getElementById("logo").style.backgroundColor = 'rgb(' + r1 + ',' + g1 + ',' + b1 + ')';	
-	document.getElementById("logo").style.opacity = a1;
+	document.getElementById("logo").alpha(a1);
 
 	document.getElementById("footer").style.backgroundColor = 'rgb(' + r3 + ',' + g3 + ',' + b3 + ')';	
-	document.getElementById("footer").style.opacity = a3;
+	document.getElementById("footer").alpha(a3);
 
 	document.getElementById("left-panel").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';	
-	document.getElementById("left-panel").style.opacity = a2;
+	document.getElementById("left-panel").alpha(a2);
 
 	document.getElementById("right-panel").style.backgroundColor = 'rgb(' + r4 + ',' + g4 + ',' + b4 + ')';	
-	document.getElementById("right-panel").style.opacity = a4;
+	document.getElementById("right-panel").alpha(a4);
 
 	document.getElementById("icon-customize").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
 
