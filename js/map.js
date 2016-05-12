@@ -111,13 +111,15 @@ function getColor(d) {
 			          '#FFEDA0';
 }
 
+var opacity = 0.8;
+
 function style(feature) {
 	return {
 		weight: 2,
 		opacity: 1,
 		color: 'white',
 		dashArray: '3',
-		fillOpacity: 0.7,
+		fillOpacity: opacity,
 		fillColor: getColor(feature.properties.density)
 	};
 }
@@ -129,7 +131,7 @@ function highlightFeature(e) {
 		weight: 5,
 		color: '#666',
 		dashArray: '',
-		fillOpacity: 0.7
+		fillOpacity: opacity
 	});
 
 	if (!L.Browser.ie && !L.Browser.opera) {
@@ -158,40 +160,13 @@ function onEachFeature(feature, layer) {
 	});
 }
 
-//LOAD ALL DATA TYPES
 //load states data
 var states_data = L.geoJson(statesData, {
 	style: style,
 	onEachFeature: onEachFeature
 });
 
-//load metropolitan_data
-var metropolitan_data = L.geoJson(metropolitanData, {
-	style: style,
-	onEachFeature: onEachFeature
-});
-
-var data_list = [states_data, metropolitan_data];
-var cur_data = 0;
-
 //initialize to states data
-geojson = data_list[cur_data].addTo(map);
-
-//CUSTOMIZE DATA TYPES
-function setDataType(data_type) {
-	map.removeLayer(data_list[cur_data]);
-	if (data_type === 'States')  {
-		cur_data = 0;
-	}
-	else if (data_type === 'Metropolitan') {
-		cur_data = 1;
-	}
-	geojson = data_list[cur_data].addTo(map);
-}
-
-function changeDataType(data_types){
-	var data_type = data_types.data.value;
-	setDataType(data_type);
-}
+geojson = states_data.addTo(map);
 
 map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');

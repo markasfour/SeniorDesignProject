@@ -60,7 +60,7 @@ function changeColorScheme(color_scheme){
 		r2 = 25; 
 		g2 = 25;
 		b2 = 25;
-		a2 = .8;
+		a2 = .9;
 
 		r3 = r1;
 		g3 = g1;
@@ -82,7 +82,7 @@ function changeColorScheme(color_scheme){
 		r2 = 255; 
 		g2 = 167;
 		b2 = 0;
-		a2 = 1;
+		a2 = .9;
 		
 		r3 = 0;
 		g3 = 135;
@@ -92,7 +92,7 @@ function changeColorScheme(color_scheme){
 		r4 = 0; 
 		g4 = 87;
 		b4 = 231;
-		a4 = 1;
+		a4 = .9;
 	}
 
 	document.getElementById("logo").style.backgroundColor = 'rgb(' + r1 + ',' + g1 + ',' + b1 + ')';	
