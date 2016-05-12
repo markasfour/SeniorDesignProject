@@ -2,14 +2,25 @@ function changeColorScheme(color_scheme){
 	var value = color_scheme.colors.value;
 	
 	var r1 = 0;
-	var g1 = 0;
-	var b1 = 0;
-	var r2 = 0; 
-	var g2 = 0;
-	var b2 = 0;
-	var a1 = 0;
-	var a2 = 0;
+	var	g1 = 172;
+	var	b1 = 237;
+	var	a1 = .8;
 
+	var	r2 = 81;
+	var	g2 = 127;
+	var	b2 = 164;
+	var	a2 = .8;
+
+	var r3 = r1;
+	var g3 = g1;
+	var b3 = b1;
+	var a3 = a1;
+
+	var r4 = r2;
+	var g4 = g2;
+	var b4 = b2;
+	var a4 = a2;
+	
 	if (value == "default") {
 		r1 = 0;
 		g1 = 172;
@@ -20,6 +31,16 @@ function changeColorScheme(color_scheme){
 		g2 = 127;
 		b2 = 164;
 		a2 = .8;
+
+		r3 = r1;
+		g3 = g1;
+		b3 = b1;
+		a3 = a1;
+
+		r4 = r2;
+		g4 = g2;
+		b4 = b2;
+		a4 = a2;
 	}
 	else if (value == "dark") {
 		r1 = 0;
@@ -31,19 +52,51 @@ function changeColorScheme(color_scheme){
 		g2 = 25;
 		b2 = 25;
 		a2 = .8;
+
+		r3 = r1;
+		g3 = g1;
+		b3 = b1;
+		a3 = a1;
+
+		r4 = r2;
+		g4 = g2;
+		b4 = b2;
+		a4 = a2;
+	}
+
+	else if (value == "Google") {
+		r1 = 214;
+		g1 = 45;
+		b1 = 32;
+		a1 = 1;
+		
+		r2 = 255; 
+		g2 = 167;
+		b2 = 0;
+		a2 = .8;
+		
+		r3 = 0;
+		g3 = 135;
+		b3 = 68;
+		a3 = 1;
+		
+		r4 = 0; 
+		g4 = 87;
+		b4 = 231;
+		a4 = .8;
 	}
 
 	document.getElementById("logo").style.backgroundColor = 'rgb(' + r1 + ',' + g1 + ',' + b1 + ')';	
 	document.getElementById("logo").style.opacity = a1;
 
-	document.getElementById("footer").style.backgroundColor = 'rgb(' + r1 + ',' + g1 + ',' + b1 + ')';	
-	document.getElementById("footer").style.opacity = a1;
+	document.getElementById("footer").style.backgroundColor = 'rgb(' + r3 + ',' + g3 + ',' + b3 + ')';	
+	document.getElementById("footer").style.opacity = a3;
 
 	document.getElementById("left-panel").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';	
 	document.getElementById("left-panel").style.opacity = a2;
 
-	document.getElementById("right-panel").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';	
-	document.getElementById("right-panel").style.opacity = a2;
+	document.getElementById("right-panel").style.backgroundColor = 'rgb(' + r4 + ',' + g4 + ',' + b4 + ')';	
+	document.getElementById("right-panel").style.opacity = a4;
 
 	document.getElementById("icon-customize").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
 

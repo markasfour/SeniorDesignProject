@@ -10,7 +10,8 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
 	<link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/>
-	
+	<link rel="stylesheet" type="text/css" href="css/nouislider.min.css"/>
+
 	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
 
 	<!-- Angular -->
@@ -74,17 +75,25 @@
 		<hr>
 		Change Site Color Scheme
 		<form name="color_scheme" onChange="changeColorScheme(color_scheme)">
-			<input type="radio" name="colors" value="default" checked> Default<br>
+			<input type="radio" name="colors" value="default" checked> Default 
+				<font color=#00aced><i class="fa fa-square" aria-hidden="true"></i></font>
+				<font color=#517fa4><i class="fa fa-square" aria-hidden="true"></i></font>
+				<br>
 			<input type="radio" name="colors" value="dark"> Dark
-		</form>
-		<!--	
-		Change Data Formatting
-		<form name="data_types" onChange="changeDataType(data_types)">
-			<input type="radio" name="data" value="States" checked> States<br>
-  	  	  	<input type="radio" name="data" value="Metropolitan"> Metropolitan<br>
+				<font color=#000000><i class="fa fa-square" aria-hidden="true"></i></font>
+				<font color=#191919><i class="fa fa-square" aria-hidden="true"></i></font>
+				<br>
+			<input type="radio" name="colors" value="Google"> Google
+				<font color=#d62d20><i class="fa fa-square" aria-hidden="true"></i></font>
+				<font color=#ffa700><i class="fa fa-square" aria-hidden="true"></i></font>
+				<font color=#008744><i class="fa fa-square" aria-hidden="true"></i></font>
+				<font color=#0057e7><i class="fa fa-square" aria-hidden="true"></i></font>
 		</form>
 		<hr>
-		-->
+		Edit Map Opacity
+			<div id="opacity-range"></div>
+			Opacity: <i id="opacity-range-value"></i>
+		<hr>
 	</div>
 
 	<!--TRENDS BUTTON-->
@@ -244,6 +253,8 @@
 		About 
     </div>	
 
+	<script type="text/javascript" src="js/nouislider.min.js"></script>
+	<script type="text/javascript" src="js/map_opacity.js"></script>
 	<script type="text/javascript" src="js/change_color_scheme.js"></script>
 	<script type="text/javascript" src="js/customize_menu_move.js"></script>
 	<script type="text/javascript" src="js/trends_menu_move.js"></script>

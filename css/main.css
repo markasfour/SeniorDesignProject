@@ -59,6 +59,11 @@ body {
 	text-align: right;
 }
 
+#opacity-range {
+	width: 85%;
+	margin: 5px auto;
+}
+
 #icon-trends {
 	cursor: pointer;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
