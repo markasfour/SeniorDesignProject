@@ -99,6 +99,35 @@ body {
 	text-align: left;
 }
 
+#twitter-banner {
+	margin: 0 auto; 
+	text-align: center; 
+	font-size: 20px; 
+	text-shadow: 0 0 1px #000000;
+	background-image: linear-gradient(to right, rgba(0, 172, 237, 0), rgba(0, 172, 237, 0.5), rgba(0, 172, 237, 0));
+}
+
+#hot-banner {
+	margin: 0 auto; 
+	text-align: center; 
+	font-size: 20px; 
+	text-shadow: 0 0 1px #000000;
+	background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0.5));
+}
+
+#search-banner {
+	margin: 0 auto; 
+	text-align: center; 
+	font-size: 20px; 
+	text-shadow: 0 0 1px #000000;
+	background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0));
+}
+
+#trend-list {
+	list-style: none;
+	padding-left: 0;
+}
+
 #time-range {
 	width: 85%;
 	margin: 5px auto;
