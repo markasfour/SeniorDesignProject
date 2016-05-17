@@ -7,7 +7,7 @@ noUiSlider.create(timeSlider, {
 	direction: 'rtl',
 	range: {
 		'min': [ 1 ],
-		'max': [ 24 ]
+		'max': [ 168 ]
 	}
 });
 
