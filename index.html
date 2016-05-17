@@ -117,12 +117,7 @@
 			</th></tr>
 			<tr><td>
 				<form name="Twitter_Trends" ng-controller="twitterController">
-					<li ng-repeat="keyword in twitterKeywords"><input type="checkbox" name=""> {{keyword.name}} </li>
-				<!--<input type="checkbox" name="1" value="1" checked> Trend 1<br>
-  	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
-  	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
-  	  	  		<input type="checkbox" name="4" value="4" checked> Trend 4<br>
-        <input type="checkbox" name="5" value="5" checked> Trend 5 -->
+					<li ng-repeat="keyword in twitterKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
 
 				</form>
 			</td></tr>
@@ -147,21 +142,13 @@
 
 			<tr><td>
 				<form name="Hot_Trends" ng-controller="googleHotController">
-              <li ng-repeat="keyword in googleHotKeywords"><input type="checkbox" name=""> {{keyword}} </li>
-				      <!--<input type="checkbox" name="1" value="1" checked> Trend 1<br>
-  	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
-  	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
-  	  	  		<input type="checkbox" name="4" value="4" checked> Trend 4<br>
-              <input type="checkbox" name="5" value="5" checked> Trend 5 -->
+              <li ng-repeat="keyword in googleHotKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
+				   
 				</form>
 				<td>
 				<form name="Search_Trends" ng-controller="googleSearchController">
-              <li ng-repeat="keyword in googleSearchKeywords"><input type="checkbox" name=""> {{keyword}} </li>
-				      <!-- <input type="checkbox" name="1" value="1" checked> Trend 1<br>
-  	  	  		<input type="checkbox" name="2" value="2" checked> Trend 2<br>
-  	  	  		<input type="checkbox" name="3" value="3" checked> Trend 3<br> 
-  	  	  		<input type="checkbox" name="4" value="4" checked> Trend 4<br>
-              <input type="checkbox" name="5" value="5" checked> Trend 5 -->
+              <li ng-repeat="keyword in googleSearchKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
+				     
 				</form>
 			</td></tr>
 		</table>
@@ -204,7 +191,7 @@
 							<li>Hadoop</li>
 							<li>AngularJS</li>
 						</ul></i>
-						<p>Software Devlopment Cycle: Evolutionary Prototyping Model</p>
+						<p>Software Development Cycle: Evolutionary Prototyping Model</p>
 					</div>
 					<div>
 						<p style="font-size: 30px; text-align: center"><b>Functionality of GTWENDS</b></p>
