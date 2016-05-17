@@ -99,6 +99,11 @@ body {
 	text-align: left;
 }
 
+#time-range {
+	width: 85%;
+	margin: 5px auto;
+}
+
 #footer {
 	width: 100%;
 	bottom: 0;
