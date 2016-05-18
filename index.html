@@ -5,7 +5,10 @@
 	<meta content="utf-8" http-equiv="encoding">
 	
 	<title>Senior Design Project</title>
+	<!-- Style Sheets -->
+	<link href="css/reset.css" rel="stylesheet" />
 	<link href="css/main.css" rel="stylesheet"/>
+	<link href="css/spinner.css" rel="stylesheet"/>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
@@ -106,52 +109,58 @@
 		<div id="icon-close-right">
 			<i class="fa fa-close"></i>
 		</div>
+		
 		<i class="fa fa-line-chart" aria-hidden="true"></i> Trends
-		<table style="width: 100%;">
-			<tr><th style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
+		
+		<!-- Twitter Trends -->
+		<div ng-controller="twitterController" class="trend"> 
+		<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
 			background-image: linear-gradient(to right, rgba(0, 172, 237, 0), rgba(0, 172, 237, 0.5), rgba(0, 172, 237, 0));">
 				<hr>
 				<i class="fa fa-twitter" aria-hidden="true"></i>
 				<p style="font-size: 8px; margin: 0 auto;">Twitter Trends</p>
 				<hr>
-			</th></tr>
-			<tr><td>
-				<form name="Twitter_Trends" ng-controller="twitterController">
-					<li ng-repeat="keyword in twitterKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
-
-				</form>
-			</td></tr>
-		</table>
-
-		<table style="width: 100%; border: 0px;">
-			<tr><th style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
-			background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0.5));">
-				<hr>
-				<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-fire" aria-hidden="true"></i>
-				<p style="font-size: 8px; margin: 0 auto;">Google Hot Trends</p>
-				<hr>
-			</th>	
-
-			<th style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
-			background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0.25), rgba(255, 0, 0, 0));">
-				<hr>
-				<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i>
-				<p style="font-size: 8px; margin: 0 auto;">Google Search Trends</p>
-				<hr>
-			</th></tr>
-
-			<tr><td>
-				<form name="Hot_Trends" ng-controller="googleHotController">
-              <li ng-repeat="keyword in googleHotKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
-				   
-				</form>
-				<td>
-				<form name="Search_Trends" ng-controller="googleSearchController">
-              <li ng-repeat="keyword in googleSearchKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
-				     
-				</form>
-			</td></tr>
-		</table>
+		</div>		
+		<form name="Twitter_Trends" class="keywordList" ng-hide="loading">
+			<li ng-repeat="keyword in twitterKeywords | limitTo:maxKeywords"><label><input type="checkbox" name=""> {{keyword}}</label></li>
+		</form>
+		<div class="loading-pulse animate-hide" ng-show="loading"></div>
+		</div>
+			
+		<!-- Google Hot Trends -->
+		<div ng-controller="googleHotController" class="trend">
+		<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
+			background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0));">
+			<hr>
+			<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-fire" aria-hidden="true"></i>
+			<p style="font-size: 8px; margin: 0 auto;">Google Hot Trends</p>
+			<hr>
+		</div>	
+		<form name="Hot_Trends" class="keywordList" ng-hide="loading">
+         <li ng-repeat="keyword in googleHotKeywords | limitTo:maxKeywords"><label><input type="checkbox" name=""> {{keyword}}</label></li>  
+		</form>
+		<div class="loading-pulse animate-hide" ng-show="loading"></div>
+		</div>
+		
+		<!-- Google Search Trends -->
+		<div ng-controller="googleSearchController" class="trend">
+		<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
+			background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0));">
+			<hr>
+			<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i>
+			<p style="font-size: 8px; margin: 0 auto;">Google Search Trends</p>
+			<hr>
+		</div>
+		
+		<form name="Search_Trends" >
+			<div class="keywordList" ng-hide="loading">
+      		<li ng-repeat="keyword in googleSearchKeywords | limitTo:maxKeywords" ><label><input type="checkbox" name=""> {{keyword}}</label></li>
+			</div>		
+		</form>
+		<div class="loading-pulse animate-hide" ng-show="loading"></div>
+		</div>
+				
+			
 		<hr>
 		Edit Time Range
 		<div id="time-range"></div>

@@ -1,3 +1,4 @@
+/* Generic Tags */
 body {
 	height: 100%;
 	left: 0px;
@@ -7,6 +8,49 @@ body {
 	color: #FFFFFF;
 }
 
+hr {
+	border: 0;
+	width: 90%;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}
+
+li {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* Classes */
+.keywordList {
+	height: 9.5em;
+	overflow-x: auto;
+}
+
+.trend {
+	height: 14em;
+	overflow: hidden;
+}
+
+.animate-hide {
+  transition: all linear 0.5s;
+  line-height: 15px;
+  opacity: 1;
+  padding: 0px;
+  margin: 0px;
+  height: 0px;
+  z-index:1000;
+}
+
+.animate-hide.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 0px;
+  z-index:-1;
+}
+
+
+/* IDS */
 #mapid {
 	width: 100%;
 	height: 100%;
@@ -152,11 +196,4 @@ body {
 	height: 85%;
 	margin: 0 auto;
 	font-size: 24px;
-}
-
-hr {
-	border: 0;
-	width: 90%;
-	height: 1px;
-	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
