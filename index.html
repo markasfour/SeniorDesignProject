@@ -117,6 +117,7 @@
 			<tr><td>
 				<form name="Twitter_Trends" ng-controller="twitterController">
 					<ul id="trend-list">
+					<li id="loading" ng-show="loading"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></li>
 					<li ng-repeat="keyword in twitterKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
 					</ul>
 				</form>
@@ -141,12 +142,14 @@
 			<tr><td>
 				<form name="Hot_Trends" ng-controller="googleHotController">
 					<ul id="trend-list">
+					<li id="loading" ng-show="loading"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></li>
 					<li ng-repeat="keyword in googleHotKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
 					</ul> 
 				</form>
 				<td>
 				<form name="Search_Trends" ng-controller="googleSearchController">
 					<ul id="trend-list">
+					<li id="loading" ng-show="loading"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></li>
 					<li ng-repeat="keyword in googleSearchKeywords | limitTo:maxKeywords"><input type="checkbox" name=""> {{keyword}} </li>
 				    </ul> 
 				</form>
@@ -155,8 +158,8 @@
 		<hr>
 		Edit Time Range
 		<div id="time-range"></div>
-			From <i id="time-range-value1"></i> hours ago<br>
-			To <i id="time-range-value2"></i> hours ago
+			From <i id="time-range-value1"></i> days ago<br>
+			To <i id="time-range-value2"></i> days ago
 		<hr>
 
 	</div>

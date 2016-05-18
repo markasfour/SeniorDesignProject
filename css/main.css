@@ -183,6 +183,10 @@ body {
 	font-size: 24px;
 }
 
+#loading {
+	text-align: center;
+}
+
 hr {
 	border: 0;
 	width: 90%;
