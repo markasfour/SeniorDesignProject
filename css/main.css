@@ -23,7 +23,7 @@ li {
 
 /* Classes */
 .keywordList {
-	height: 9.5em;
+	height: 9.5<div style="text-align: right;"></div>em;
 	overflow-x: auto;
 }
 

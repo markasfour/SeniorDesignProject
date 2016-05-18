@@ -1,13 +1,13 @@
 var timeSlider = document.getElementById('time-range');
 
 noUiSlider.create(timeSlider, {
-	start: [1, 24],
+	start: [0, 4],
 	connect: true,
 	step: 1,
 	direction: 'rtl',
 	range: {
-		'min': [ 1 ],
-		'max': [ 168 ]
+		'min': [ 0 ],
+		'max': [ 7 ]
 	}
 });
 
