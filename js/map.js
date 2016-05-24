@@ -82,19 +82,19 @@ function changeMapType(map_types){
 
 //THIS COLORS THE MAP	
 // control that shows state info on hover
-var info = L.control();
+//var info = L.control();
 
-info.onAdd = function (map) {
-	this._div = L.DomUtil.create('div', 'info');
-	this.update();
-	return this._div;
-};
+//info.onAdd = function (map) {
+//	this._div = L.DomUtil.create('div', 'info');
+//	this.update();
+//	return this._div;
+//};
 
-info.update = function (props) {
-	this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-		'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-		: 'Hover over a state');
-};
+//info.update = function (props) {
+//	this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+//		'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+//		: 'Hover over a state');
+//};
 
 //info.addTo(map);
 
@@ -138,14 +138,14 @@ function highlightFeature(e) {
 		layer.bringToFront();
 	}
 
-	info.update(layer.feature.properties);
+//	info.update(layer.feature.properties);
 }
 
 var geojson;
 
 function resetHighlight(e) {
 	geojson.resetStyle(e.target);
-	info.update();
+//	info.update();
 }
 
 function zoomToFeature(e) {
