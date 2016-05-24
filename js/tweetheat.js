@@ -4,11 +4,12 @@ var keywordURL = baseURL + "/keywords"
 var twitterURL = keywordURL + "/twitter"
 var googleHotURL = keywordURL + "/google/search"
 var googleSearchURL = keywordURL + "/google/hot"
-
+console.log(earliest_date);
+console.log("here");
 var dataURL = baseURL + "/data"
-var googledataURL = dataURL + "/google"
+var googledataURL = dataURL + "/google/" + earliest_date + "/" + oldest_date;
 
-console.log("urls are ", twitterURL, googleHotURL, googleSearchURL, googledataURL)
+console.log("urls are ", twitterURL, googleHotURL, googleSearchURL, googledataURL);
 
 
 var tweetheat = angular.module('tweetheat', ['ngAnimate']);
@@ -142,6 +143,8 @@ tweetheat.controller('googleDataController', ['$scope', '$http', '$q', 'heatFact
   //console.log("inside search controller");
   $scope.print("test");
   requestForGoogleData.then( function(result) {
+    console.log("done");
+    console.log(result);
     $scope.loading = false;
     $scope.googleSearchKeywords = result.result;
   });
