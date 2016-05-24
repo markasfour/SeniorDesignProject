@@ -4,8 +4,7 @@ var keywordURL = baseURL + "/keywords"
 var twitterURL = keywordURL + "/twitter"
 var googleHotURL = keywordURL + "/google/search"
 var googleSearchURL = keywordURL + "/google/hot"
-console.log(earliest_date);
-console.log("here");
+
 var dataURL = baseURL + "/data"
 var googledataURL = dataURL + "/google/" + earliest_date + "/" + oldest_date;
 
