@@ -1,4 +1,4 @@
-var baseURL = "http://ghamaty.tech/maprest/apv1/get"
+var baseURL = "https://ghamaty.tech/maprest/apv1/get"
 
 var keywordURL = baseURL + "/keywords"
 var twitterURL = keywordURL + "/twitter"
