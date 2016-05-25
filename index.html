@@ -28,7 +28,8 @@
 	<!--MAP-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>	
-	<script type="text/javascript" src="js/us-states.js"></script>	
+	<script type="text/javascript" src="js/google-states.js"></script>	
+	<script type="text/javascript" src="js/twitter-states.js"></script>
 	
 	<script type="text/javascript" src="js/time_bounds.js"></script>
 	<script type="text/javascript" src="js/tweetheat.js"></script>	
@@ -95,9 +96,15 @@
 				<font color=#0057e7><i class="fa fa-square" aria-hidden="true"></i></font>
 		</form>
 		<hr>
-		Edit Map Opacity
-			<div id="opacity-range"></div>
-			Opacity: <i id="opacity-range-value"></i>
+		Edit Map Opacity<br>
+			<br>
+			Google Data Opacity: <i id="opacity-range-value-google"></i>
+			<div id="opacity-range-google"></div>
+			
+			<br>
+			<br>	
+			Twitter Data Opacity: <i id="opacity-range-value-twitter"></i>
+			<div id="opacity-range-twitter"></div>
 		<hr>
 	</div>
 
@@ -275,7 +282,8 @@
 
 	<script type="text/javascript" src="js/accordion.js"></script>
 	<script type="text/javascript" src="js/nouislider.min.js"></script>
-	<script type="text/javascript" src="js/map_opacity.js"></script>
+	<script type="text/javascript" src="js/map_opacity_google.js"></script>
+	<script type="text/javascript" src="js/map_opacity_twitter.js"></script>
 	<script type="text/javascript" src="js/time_range.js"></script>
 	<script type="text/javascript" src="js/change_color_scheme.js"></script>
 	<script type="text/javascript" src="js/customize_menu_move.js"></script>

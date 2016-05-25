@@ -100,7 +100,7 @@ function changeMapType(map_types){
 
 
 // get color depending on population density value
-function getColor(d) {
+function getColor1(d) {
 	return d > 1000 ? '#800026' :
 		   d > 500  ? '#BD0026' :
 		   d > 200  ? '#E31A1C' :
@@ -108,19 +108,42 @@ function getColor(d) {
 		   d > 50   ? '#FD8D3C' :
 		   d > 20   ? '#FEB24C' :
 		   d > 10   ? '#FED976' :
-			          '#FFEDA0';
+			          '#FFEDA0';	
 }
 
-var opacity = 0.8;
+function getColor2(d) {
+	return d > 1000 ? '#8600BF' :
+		   d > 500  ? '#7811C2' :
+		   d > 200  ? '#5D35CA' :
+		   d > 100  ? '#5047CE' :
+		   d > 50   ? '#356AD5' :
+		   d > 20   ? '#287CD9' :
+		   d > 10   ? '#0DA0E1' :
+			          '#00B2E5';
+}
 
-function style(feature) {
+var opacity_google = 0.8;
+var opacity_twitter = 0.8;
+
+function style1(feature, x) {
 	return {
 		weight: 2,
 		opacity: 1,
 		color: 'white',
 		dashArray: '3',
-		fillOpacity: opacity,
-		fillColor: getColor(feature.properties.density)
+		fillOpacity: opacity_google,
+		fillColor: getColor1(feature.properties.density)
+	};
+}
+
+function style2(feature, x) {
+	return {
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: opacity_twitter,
+		fillColor: getColor2(feature.properties.density)
 	};
 }
 
@@ -131,7 +154,7 @@ function highlightFeature(e) {
 		weight: 5,
 		color: '#666',
 		dashArray: '',
-		fillOpacity: opacity
+		//fillOpacity: opacity
 	});
 
 	if (!L.Browser.ie && !L.Browser.opera) {
@@ -161,12 +184,17 @@ function onEachFeature(feature, layer) {
 }
 
 //load states data
-var states_data = L.geoJson(statesData, {
-	style: style,
+//google
+var states_data_google = L.geoJson(GoogleStatesData, {
+	style: style1,
 	onEachFeature: onEachFeature
 });
-
-//initialize to states data
-geojson = states_data.addTo(map);
+geojson = states_data_google.addTo(map);
+//twitter
+var states_data_twitter = L.geoJson(TwitterStatesData, {
+	style: style2,
+	onEachFeature: onEachFeature
+});
+geojson = states_data_twitter.addTo(map);
 
 map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');

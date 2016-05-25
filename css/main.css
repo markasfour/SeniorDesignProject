@@ -103,7 +103,12 @@ li {
 	text-align: right;
 }
 
-#opacity-range {
+#opacity-range-google {
+	width: 85%;
+	margin: 5px auto;
+}
+
+#opacity-range-twitter {
 	width: 85%;
 	margin: 5px auto;
 }
