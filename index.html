@@ -31,7 +31,10 @@
 	<script type="text/javascript" src="js/google-states.js"></script>	
 	<script type="text/javascript" src="js/twitter-states.js"></script>
 	
+	<!--JS-->
+	<script type="text/javascript" src="js/stateTranslation.js"></script>
 	<script type="text/javascript" src="js/time_bounds.js"></script>
+	<script type="text/javascript" src="js/parsers.js"></script>
 	<script type="text/javascript" src="js/tweetheat.js"></script>	
 
   <script>
@@ -48,7 +51,7 @@
 	
 
 	<!--MAP-->
-	<div id="mapid"></div>
+	<div id="mapid" ng-controller="mapController"></div>
 	<script type="text/javascript" src="js/map.js"></script>
 
 	<!--LOGO-->
@@ -190,10 +193,6 @@
 		</div>	
 	</div>
 
-
-	<!-- DATA -->
-	<div ng-controller="googleDataController">
-	</div>
 
 	<!--ABOUT SCREEN-->
 	<div id="about">

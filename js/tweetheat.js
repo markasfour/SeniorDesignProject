@@ -10,7 +10,6 @@ var googledataURL = dataURL + "/google/" + earliest_date + "/" + oldest_date;
 
 console.log("urls are ", twitterURL, googleHotURL, googleSearchURL, googledataURL);
 
-
 var tweetheat = angular.module('tweetheat', ['ngAnimate']);
 
 tweetheat.run(function($rootScope) {
@@ -80,17 +79,33 @@ tweetheat.factory('heatFactory', function(){
       return result.data;
     });
   }
+  
+  
 
   return {
     getKeywords:getKeywords,
     getTwitterKeywords:getTwitterKeywords,
     getGoogleSearchKeywords:getGoogleSearchKeywords,
     getGoogleHotKeywords:getGoogleHotKeywords,
-
     getGoogleData:getGoogleData
   }
 
 });
+
+
+tweetheat.controller('mapController', ['$scope', '$http', '$q', 'heatFactory', 
+                                        function($scope,$http,$q, heatFactory){
+  $scope.loading = true;
+                                          
+  var requestForGoogleData = heatFactory.getGoogleData($http);
+  requestForGoogleData.then( function(result) {
+    $scope.loading = false;
+    $scope.parsed = parseGoogleData(result.result);
+	  $scope.weights = getWeights($scope.parsed);
+    setMapData($scope.weights, GoogleStatesData)
+	});                
+
+}]);
 
 tweetheat.controller('twitterController', ['$scope', '$http', '$q', 'heatFactory', 
                                         function($scope,$http,$q, heatFactory){
@@ -122,7 +137,6 @@ tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFa
                                         function($scope,$http,$q, heatFactory){
   $scope.maxKeywords = 100;
   $scope.loading = true;
-  
   var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
   //console.log("inside search controller");
   //$scope.print("test");
@@ -133,19 +147,3 @@ tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFa
 
 }]);
 
-
-tweetheat.controller('googleDataController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactory){
-  $scope.loading = true;
-  
-  var requestForGoogleData = heatFactory.getGoogleData($http);
-  //console.log("inside search controller");
-  $scope.print("test");
-  requestForGoogleData.then( function(result) {
-    console.log("done");
-    console.log(result);
-    $scope.loading = false;
-    $scope.googleSearchKeywords = result.result;
-  });
-
-}]);
