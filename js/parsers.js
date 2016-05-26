@@ -80,4 +80,13 @@ function setMapData(new_weights, mapDensities){
 		});
 		geo_json = states_data_google.addTo(map);
 	
+	
+		//twitter
+		map.removeLayer(states_data_twitter);
+		//states_data_twitter = L.geoJson(TwitterStatesData, {
+		//	style: style2,
+		//	onEachFeature: onEachFeature
+		//});
+		geo_json = states_data_twitter.addTo(map);
+	
 }
