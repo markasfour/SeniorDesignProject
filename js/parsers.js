@@ -71,4 +71,13 @@ function setMapData(new_weights, mapDensities){
 		mapDensities["features"][i]["properties"]["densities"] = 0;
 	}
   }
+	
+  //google
+		map.removeLayer(states_data_google);
+		states_data_google = L.geoJson(GoogleStatesData, {
+			style: style1,
+			onEachFeature: onEachFeature
+		});
+		geo_json = states_data_google.addTo(map);
+	
 }
