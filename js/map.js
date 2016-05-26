@@ -101,12 +101,12 @@ function changeMapType(map_types){
 
 // get color depending on population density value
 function getColor1(d) {
-	return d > 1000 ? '#800026' :
-		   d > 500  ? '#BD0026' :
-		   d > 200  ? '#E31A1C' :
-		   d > 100  ? '#FC4E2A' :
-		   d > 50   ? '#FD8D3C' :
-		   d > 20   ? '#FEB24C' :
+	return d > 40 ? '#800026' :
+		   d > 35  ? '#BD0026' :
+		   d > 30  ? '#E31A1C' :
+		   d > 25  ? '#FC4E2A' :
+		   d > 20   ? '#FD8D3C' :
+		   d > 15   ? '#FEB24C' :
 		   d > 10   ? '#FED976' :
 			          '#FFEDA0';	
 }

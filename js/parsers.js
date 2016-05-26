@@ -66,27 +66,27 @@ function setMapData(new_weights, mapDensities){
 	  /* If we find new weight set it to that otherwise set to 0*/
 	if(new_weights.hasOwnProperty(mapDensities["features"][i]["properties"]["name"])){
 		console.log("setting property", mapDensities["features"][i]["properties"]["name"], new_weights[mapDensities["features"][i]["properties"]["name"]]);
-		mapDensities["features"][i]["properties"]["densities"] = new_weights[mapDensities["features"][i]["properties"]["name"]];
+		mapDensities["features"][i]["properties"]["density"] = new_weights[mapDensities["features"][i]["properties"]["name"]];
 	} else {
-		mapDensities["features"][i]["properties"]["densities"] = 0;
+		mapDensities["features"][i]["properties"]["density"] = 0;
 	}
   }
 	
   //google
-		map.removeLayer(states_data_google);
-		states_data_google = L.geoJson(GoogleStatesData, {
-			style: style1,
-			onEachFeature: onEachFeature
-		});
-		geo_json = states_data_google.addTo(map);
+  map.removeLayer(states_data_google);
+  states_data_google = L.geoJson(GoogleStatesData, {
+    style: style1,
+    onEachFeature: onEachFeature
+  });
+  geo_json = states_data_google.addTo(map);
+
 	
-	
-		//twitter
-		map.removeLayer(states_data_twitter);
-		//states_data_twitter = L.geoJson(TwitterStatesData, {
-		//	style: style2,
-		//	onEachFeature: onEachFeature
-		//});
-		geo_json = states_data_twitter.addTo(map);
+  //twitter
+  map.removeLayer(states_data_twitter);
+  //states_data_twitter = L.geoJson(TwitterStatesData, {
+  //	style: style2,
+  //	onEachFeature: onEachFeature
+  //});
+  geo_json = states_data_twitter.addTo(map);
 	
 }
