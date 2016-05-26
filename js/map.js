@@ -98,28 +98,43 @@ function changeMapType(map_types){
 
 //info.addTo(map);
 
+var d1g = 0;
+var d2g = 0;
+var d3g = 0;
+var d4g = 0;
+var d5g = 0;
+var d6g = 0;
+var d7g = 0;
 
 // get color depending on population density value
 function getColor1(d) {
-	return d > 40 ? '#800026' :
-		   d > 35  ? '#BD0026' :
-		   d > 30  ? '#E31A1C' :
-		   d > 25  ? '#FC4E2A' :
-		   d > 20   ? '#FD8D3C' :
-		   d > 15   ? '#FEB24C' :
-		   d > 10   ? '#FED976' :
-			          '#FFEDA0';	
+	return d > d1g ? 'rgba(255, 0, 0, 1)' :
+		   d > d2g ? 'rgba(255, 0, 0, .875)' :
+		   d > d3g ? 'rgba(255, 0, 0, .75)' :
+		   d > d4g ? 'rgba(255, 0, 0, .625)' :
+		   d > d5g ? 'rgba(255, 0, 0, .50)' :
+		   d > d6g ? 'rgba(255, 0, 0, .375)' :
+		   d > d7g ? 'rgba(255, 0, 0, .25)' :
+			         'rgba(255, 0, 0, .125)';	
 }
 
+var d1t = 0;
+var d2t = 0;
+var d3t = 0;
+var d4t = 0;
+var d5t = 0;
+var d6t = 0;
+var d7t = 0;
+
 function getColor2(d) {
-	return d > 1000 ? '#8600BF' :
-		   d > 500  ? '#7811C2' :
-		   d > 200  ? '#5D35CA' :
-		   d > 100  ? '#5047CE' :
-		   d > 50   ? '#356AD5' :
-		   d > 20   ? '#287CD9' :
-		   d > 10   ? '#0DA0E1' :
-			          '#00B2E5';
+	return d > d1t ? 'rgba(81, 127, 164, 1)' :
+		   d > d2t ? 'rgba(81, 127, 164, .875)' :
+		   d > d3t ? 'rgba(81, 127, 164, .75)' :
+		   d > d4t ? 'rgba(81, 127, 164, .625)' :
+		   d > d5t ? 'rgba(81, 127, 164, .50)' :
+		   d > d6t ? 'rgba(81, 127, 164, .375)' :
+		   d > d7t ? 'rgba(81, 127, 164, .25)' :
+			         'rgba(81, 127, 164, .125)';
 }
 
 var opacity_google = 0.8;

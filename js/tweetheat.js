@@ -101,7 +101,7 @@ tweetheat.controller('mapController', ['$scope', '$http', '$q', 'heatFactory',
   requestForGoogleData.then( function(result) {
     $scope.loading = false;
     $scope.parsed = parseGoogleData(result.result);
-	  $scope.weights = getWeights($scope.parsed);
+	  $scope.weights = getWeights($scope.parsed, "google");
     setMapData($scope.weights, GoogleStatesData)
 	});                
 

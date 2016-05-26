@@ -18,17 +18,41 @@ function parseGoogleData(toParse){
 }
 
 
-
+function set_colors(max, min, color_template) {
+	if (color_template == "google") {
+		var range = max - min;
+		range = range / 7;
+		d1g = max - range;
+		d2g = max - (2 * range);
+		d3g = max - (3 * range);
+		d4g = max - (4 * range);
+		d5g = max - (5 * range);
+		d6g = max - (6 * range);
+		d7g = max - (7 * range);
+	}
+	else {
+		var range = max - min;
+		range = range / 7;
+		d1t = max - range;
+		d2t = max - (2 * range);
+		d3t = max - (3 * range);
+		d4t = max - (4 * range);
+		d5t = max - (5 * range);
+		d6t = max - (6 * range);
+		d7t = max - (7 * range);
+	}
+}
 
 
 /*
 	toCalc should be parsed after filtering
 	Convert from our table to average weights per state
 */
-function getWeights(toCalc){
+function getWeights(toCalc, color_template){
 	var mapCount   = {};
 	var mapWeights = {};
-	
+	var max = 0;
+	var min = 101;
 	for (i = 0; i < toCalc.length; i ++){
 		/* check to see if it is initialized*/
 		if(mapWeights.hasOwnProperty(toCalc[i].state)){
@@ -36,7 +60,7 @@ function getWeights(toCalc){
 			mapCount[toCalc[i].state]	= mapCount[toCalc[i].state] + 1;
 		} else {
 			mapWeights[toCalc[i].state]	= parseInt(toCalc[i].google_num);
-			mapCount[toCalc[i].state]	= 1;
+			mapCount[toCalc[i].state]	= 1;	
 		}
 	}
 	
@@ -44,9 +68,18 @@ function getWeights(toCalc){
 	for (var state in mapWeights) {
 		if(mapWeights.hasOwnProperty(state)){
 			mapWeights[state] = mapWeights[state] / mapCount[state]	;
+			if (mapWeights[state] > max) {
+				max = mapWeights[state];
+			}
+			if (mapWeights[state] < min) {
+				min = mapWeights[state];
+			}
 		}
 	}
 	
+	//set color limits based off of max and min values
+	color_template == set_colors(max, min, color_template);
+
 	console.log("MapWeights are ", mapWeights)
 	
 	return mapWeights;
