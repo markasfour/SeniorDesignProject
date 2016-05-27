@@ -6,9 +6,10 @@ var googleHotURL = keywordURL + "/google/search"
 var googleSearchURL = keywordURL + "/google/hot"
 
 var dataURL = baseURL + "/data"
-var googledataURL = dataURL + "/google/" + earliest_date + "/" + oldest_date;
+var googleDataURL = dataURL + "/google/" + earliest_date + "/" + oldest_date;
+var twitterDataURL = dataURL + "/twitter/" + earliest_date + "/" + oldest_date;
 
-console.log("urls are ", twitterURL, googleHotURL, googleSearchURL, googledataURL);
+console.log("urls are ", twitterURL, googleHotURL, googleSearchURL, googleDataURL);
 
 var tweetheat = angular.module('tweetheat', ['ngAnimate']);
 
@@ -69,7 +70,7 @@ tweetheat.factory('heatFactory', function(){
   }
 
   function getGoogleData($http){
-    var url = googledataURL;  
+    var url = googleDataURL;  
     return $http({
       method: 'GET',
       url: url,
@@ -80,30 +81,64 @@ tweetheat.factory('heatFactory', function(){
     });
   }
   
-  
+  function getTwitterData($http){
+    var url = twitterDataURL;  
+    return $http({
+      method: 'GET',
+      url: url,
+      dataType: 'jsonp',
+      headers: {'Accept': 'application/json'}
+    }).then(function (result) {
+      return result.data;
+    });
+  }
 
   return {
     getKeywords:getKeywords,
     getTwitterKeywords:getTwitterKeywords,
     getGoogleSearchKeywords:getGoogleSearchKeywords,
     getGoogleHotKeywords:getGoogleHotKeywords,
-    getGoogleData:getGoogleData
+    getGoogleData:getGoogleData,
+    getTwitterData:getTwitterData
   }
 
 });
 
 
-tweetheat.controller('mapController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactory){
+tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
+                                        function($scope, $rootScope, $http,$q, heatFactory){
   $scope.loading = true;
+  $scope.google_loading = true;
+  $scope.twitter_loading = true;
                                           
   var requestForGoogleData = heatFactory.getGoogleData($http);
   requestForGoogleData.then( function(result) {
-    $scope.loading = false;
-    $scope.parsed = parseGoogleData(result.result);
-	  $scope.weights = getWeights($scope.parsed, "google");
-    setMapData($scope.weights, GoogleStatesData)
-	});                
+    $scope.google_loading = false;
+    $rootScope.google_data = parseData(result.result);
+	  $scope.google_weights = getWeights($rootScope.google_data, "google");
+    setMapData($scope.google_weights, GoogleStatesData);
+	});             
+                                          
+  var requestForTwitterData = heatFactory.getTwitterData($http);
+  requestForTwitterData.then( function(result) {
+    $scope.twitter_loading = false;
+    $rootScope.twitter_data = parseData(result.result);
+	  $scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
+    setMapData($scope.twitter_weights, TwitterStatesData);
+    console.log("twitterweights are", $scope.twitter_weights);
+	});
+  
+                                          
+  $scope.$watch('[twitter_loading,google_loading]', function() {
+    
+    
+    console.log("twitter_loading changed!");
+    if(!$scope.google_loading && !$scope.twitter_loading){
+      console.log("settingloadin false");
+      $scope.loading = false;
+    }
+    
+  });
 
 }]);
 
