@@ -130,8 +130,6 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
   
                                           
   $scope.$watch('[twitter_loading,google_loading]', function() {
-    
-    
     console.log("twitter_loading changed!");
     if(!$scope.google_loading && !$scope.twitter_loading){
       console.log("settingloadin false");
@@ -142,8 +140,8 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
 
 }]);
 
-tweetheat.controller('twitterController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactory){
+tweetheat.controller('twitterController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
+                                        function($scope,$rootScope,$http,$q, heatFactory){
   $scope.maxKeywords = 100;
   $scope.loading = true;
   
@@ -153,6 +151,21 @@ tweetheat.controller('twitterController', ['$scope', '$http', '$q', 'heatFactory
     $scope.twitterKeywords = result.result;
 	  
 	});
+                                          
+  $rootScope.$watch('twitter_data', function() {
+    /*twitter data loaded*/
+    if($rootScope.twitter_data){
+      $scope.keywords = [];
+      
+      /*each key is a keyword and its value is true false */
+      for(var i = 0 ; i < $rootScope.twitter_data.length; i++){
+        $scope.selection.push({keyword : $rootScope.twitter_datas[i]['keyword'], selected : true} );
+      }
+      
+      
+      console.log("selection is ", $scope.selection)
+    }
+  });
 
 }]);
 

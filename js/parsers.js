@@ -80,7 +80,7 @@ function getWeights(toCalc, color_template){
 	//set color limits based off of max and min values
 	color_template == set_colors(max, min, color_template);
 
-	console.log("MapWeights are ", mapWeights)
+	//console.log("MapWeights are ", mapWeights)
 	
 	return mapWeights;
 }
