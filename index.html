@@ -169,18 +169,19 @@
 		</div>
 		<div class="panel">
 			<form name="Hot_Trends" class="keywordList" ng-hide="loading">
-         	 	<!--<li ng-repeat="keyword in googleHotKeywords | limitTo:maxKeywords">
+         	 	<li ng-repeat="keyword in googleHotKeywords | limitTo:maxKeywords">
 					<label><input type="checkbox" name=""> {{keyword}}</label>
-				</li> -->
-				
-				<li ng-repeat="row in keywords">
-					{{keyword}}
+				</li> 
+			
+
+				<!--<li ng-repeat="row in keywords">
+					{{keyword}}-->
 					<!--<label>
 						<input type="checkbox" ng-model="selection.keywords[item.keyword]" name="group" id="{{item.keyword}}" />
 						{{item.keyword}}
 					</label>-->
-    			</li>
-				
+    			<!--</li>-->
+
 			</form>
 			<div class="loading-pulse animate-hide" ng-show="loading"></div>
 		</div>

@@ -96,14 +96,23 @@ function getWeights(toCalc, color_template){
 
 function setMapData(new_weights, mapDensities){
   /*For item in our state*/
-  console.log(new_weights);
+  //console.log("NEW WEIGHTS", new_weights);
+  //console.log("MAP DENSITIES", mapDensities);
+  
   for(i = 0; i < mapDensities["features"].length; i++){
+    
+    //console.log(mapDensities["features"][i]["properties"]["name"]);
+    //console.log(stateTranslationFA[mapDensities["features"][i]["properties"]["name"]]);
+
     /*var abb = stateTranslationFA[mapDensities["features"][i]["properties"]["name"]];*/
 	
 	  /* If we find new weight set it to that otherwise set to 0*/
 	if(new_weights.hasOwnProperty(mapDensities["features"][i]["properties"]["name"])){
 		//console.log("setting property", mapDensities["features"][i]["properties"]["name"], new_weights[mapDensities["features"][i]["properties"]["name"]]);
 		mapDensities["features"][i]["properties"]["density"] = new_weights[mapDensities["features"][i]["properties"]["name"]];
+	} else if (new_weights.hasOwnProperty(stateTranslationFA[mapDensities["features"][i]["properties"]["name"]])) {
+		mapDensities["features"][i]["properties"]["density"] = new_weights[stateTranslationFA[mapDensities["features"][i]["properties"]["name"]]];	
+		//console.log(new_weights[stateTranslationFA[mapDensities["features"][i]["properties"]["name"]]]);
 	} else {
 		mapDensities["features"][i]["properties"]["density"] = 0;
 		console.log("HERE");
