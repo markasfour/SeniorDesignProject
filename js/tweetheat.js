@@ -116,9 +116,9 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     $scope.google_loading = false;
     $rootScope.google_data = parseData(result.result);
 	  $scope.google_weights = getWeights($rootScope.google_data, "google");
-    console.log("setting google map data...");
+    //console.log("setting google map data...");
     setMapData($scope.google_weights, GoogleStatesData);
-    console.log(GoogleStatesData);
+    //console.log(GoogleStatesData);
 	});             
                                           
   var requestForTwitterData = heatFactory.getTwitterData($http);
@@ -126,9 +126,9 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     $scope.twitter_loading = false;
     $rootScope.twitter_data = parseData(result.result);
 	  $scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
-    console.log("setting twitter map data...");
+    //console.log("setting twitter map data...");
     setMapData($scope.twitter_weights, TwitterStatesData);
-    console.log(TwitterStatesData);
+    //console.log(TwitterStatesData);
 	});
   
                                           
@@ -148,25 +148,23 @@ tweetheat.controller('twitterController', ['$scope', '$rootScope', '$http', '$q'
   $scope.maxKeywords = 100;
   $scope.loading = true;
   
-  var requestForTwitterKeywords = heatFactory.getTwitterKeywords($http);
+  /*var requestForTwitterKeywords = heatFactory.getTwitterKeywords($http);
   requestForTwitterKeywords.then( function(result) {
     $scope.loading = false;
     $scope.twitterKeywords = result.result;
 	  
-	});
+	});*/
                                           
   $rootScope.$watch('twitter_data', function() {
     /*twitter data loaded*/
     if($rootScope.twitter_data){
       $scope.keywords = [];
-      
       /*each key is a keyword and its value is true false */
       for(var i = 0 ; i < $rootScope.twitter_data.length; i++){
+        if()
         $scope.selection.push({keyword : $rootScope.twitter_datas[i]['keyword'], selected : true} );
       }
-      
-      
-      console.log("selection is ", $scope.selection)
+      //console.log("selection is ", $scope.selection)
     }
   });
 
