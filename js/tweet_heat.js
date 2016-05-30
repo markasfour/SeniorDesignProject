@@ -11,13 +11,7 @@ var twitterDataURL = dataURL + "/twitter/" + earliest_date + "/" + oldest_date;
 
 console.log("urls are ", twitterURL, googleHotURL, googleSearchURL, googleDataURL);
 
-var tweetheat = angular.module('tweetheat', ['ngAnimate']);
-
-tweetheat.run(function($rootScope) {
-  $rootScope.print = function(toPrint) {
-    console.log(toPrint);
-  }
-});
+var tweetheat = angular.module('tweetheat', ['ngAnimate', 'rzModule',  'ngRoute']);
 
 tweetheat.factory('heatFactory', function(){
   //used to get the keywords
@@ -105,66 +99,59 @@ tweetheat.factory('heatFactory', function(){
 });
 
 
-tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
-                                        function($scope, $rootScope, $http,$q, heatFactory){
-  $scope.loading = true;
-  $scope.google_loading = true;
-  $scope.twitter_loading = true;
-                                          
-  var requestForGoogleData = heatFactory.getGoogleData($http);
-  requestForGoogleData.then( function(result) {
-    $scope.google_loading = false;
-    $rootScope.google_data = parseData(result.result);
-	  $scope.google_weights = getWeights($rootScope.google_data, "google");
-    //console.log("setting google map data...");
-    setMapData($scope.google_weights, GoogleStatesData);
-    //console.log(GoogleStatesData);
-	});             
-                                          
-  var requestForTwitterData = heatFactory.getTwitterData($http);
-  requestForTwitterData.then( function(result) {
-    $scope.twitter_loading = false;
-    $rootScope.twitter_data = parseData(result.result);
-	  $scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
-    //console.log("setting twitter map data...");
-    setMapData($scope.twitter_weights, TwitterStatesData);
-    //console.log(TwitterStatesData);
-	});
-  
-                                          
-  $scope.$watch('[twitter_loading,google_loading]', function() {
-    //console.log("twitter_loading changed!");
-    if(!$scope.google_loading && !$scope.twitter_loading){
-      //console.log("setting loading to false");
-      $scope.loading = false;
-    }
-    
-  });
 
+tweetheat.controller('timeSliderController', ['$scope', '$rootScope',  
+                                        function($scope,$rootScope){
+	$scope.slider = {
+	  min: 0,
+	  max: 3,
+	  options: {
+		floor: 0,
+		ceil: 7
+	  }
+	};	
+	
+	$scope.$watch('[slider.min, slider.max]', function() {
+    //console.log("watch went off  " + $scope.slider.min + " | " + $scope.slider.max);
+    
+    $rootScope.start_date = get_start_day(parseInt($scope.slider.min));
+		$rootScope.end_date = get_end_day(parseInt($scope.slider.max));
+			
+		//console.log("set dates from " + $scope.slider.min + " | " + $scope.slider.max);
+		//console.log("set dates to " + $rootScope.start_date + " | " + $rootScope.end_date);
+		
+		
+	});
 }]);
 
-tweetheat.controller('twitterController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$rootScope,$http,$q, heatFactory){
+
+
+
+
+tweetheat.controller('twitterController', ['$scope', '$rootScope', 
+                                        function($scope,$rootScope){
   $scope.maxKeywords = 100;
   $scope.loading = true;
-  
-  /*var requestForTwitterKeywords = heatFactory.getTwitterKeywords($http);
-  requestForTwitterKeywords.then( function(result) {
-    $scope.loading = false;
-    $scope.twitterKeywords = result.result;
-	  
-	});*/
                                           
   $rootScope.$watch('twitter_data', function() {
     /*twitter data loaded*/
     if($rootScope.twitter_data){
       $scope.keywords = [];
+      var start_date = get_start_day();
+      var end_date = get_end_day();
+	  console.log("start and end " + start_date + " | " + end_date)
       /*each key is a keyword and its value is true false */
       for(var i = 0 ; i < $rootScope.twitter_data.length; i++){
-        if()
-        $scope.selection.push({keyword : $rootScope.twitter_datas[i]['keyword'], selected : true} );
+        //console.log("checking " + $rootScope.twitter_data[i]['timestamp'])
+        /* check for within the time range */
+        if($rootScope.twitter_data[i].timestamp < end_date 
+		   && $rootScope.twitter_data[i].timestamp > start_date){
+			
+          $scope.selection.push({keyword : $rootScope.twitter_data[i]['keyword'], selected : true} );
+        }
       }
-      //console.log("selection is ", $scope.selection)
+      loading = false;
+      console.log("selection is ", $scope.selection)
     }
   });
 
@@ -192,6 +179,45 @@ tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFa
   requestForGoogleSearchKeywords.then( function(result) {
     $scope.loading = false;
     $scope.googleSearchKeywords = result.result;
+  });
+
+}]);
+
+
+tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
+                                        function($scope, $rootScope, $http,$q, heatFactory){
+  $scope.loading = true;
+  $scope.google_loading = true;
+  $scope.twitter_loading = true;
+                                          
+  var requestForGoogleData = heatFactory.getGoogleData($http);
+  requestForGoogleData.then( function(result) {
+    $rootScope.google_data = parseData(result.result);
+	  $scope.google_weights = getWeights($rootScope.google_data, "google");
+    //console.log("setting google map data...");
+    setMapData($scope.google_weights, GoogleStatesData);
+    $scope.google_loading = false;
+    //console.log(GoogleStatesData);
+	});             
+                                          
+  var requestForTwitterData = heatFactory.getTwitterData($http);
+  requestForTwitterData.then( function(result) {
+    $rootScope.twitter_data = parseData(result.result);
+	  $scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
+    //console.log("setting twitter map data...");
+    setMapData($scope.twitter_weights, TwitterStatesData);
+    $scope.twitter_loading = false;
+    //console.log(TwitterStatesData);
+	});
+  
+                                          
+  $scope.$watch('[twitter_loading,google_loading]', function() {
+    //console.log("twitter_loading changed!");
+    if(!$scope.google_loading && !$scope.twitter_loading){
+      //console.log("setting loading to false");
+      $scope.loading = false;
+    }
+    
   });
 
 }]);
