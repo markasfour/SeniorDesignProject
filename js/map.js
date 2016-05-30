@@ -106,16 +106,20 @@ var d5g = 0;
 var d6g = 0;
 var d7g = 0;
 
+var google_color_R = 255;
+var google_color_G = 0;
+var google_color_B = 0;
+
 // get color depending on population density value
 function getColor1(d) {
-	return d > d1g ? 'rgba(255, 0, 0, 1)' :
-		   d > d2g ? 'rgba(255, 0, 0, .875)' :
-		   d > d3g ? 'rgba(255, 0, 0, .75)' :
-		   d > d4g ? 'rgba(255, 0, 0, .625)' :
-		   d > d5g ? 'rgba(255, 0, 0, .50)' :
-		   d > d6g ? 'rgba(255, 0, 0, .375)' :
-		   d > d7g ? 'rgba(255, 0, 0, .25)' :
-			         'rgba(255, 0, 0, .125)';	
+	return d > d1g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', 1)' :
+		   d > d2g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .875)' :
+		   d > d3g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .75)' :
+		   d > d4g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .625)' :
+		   d > d5g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .50)' :
+		   d > d6g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .375)' :
+		   d > d7g ? 'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .25)' :
+			         'rgba('+google_color_R+', '+google_color_G+', '+google_color_B+', .125)';	
 }
 
 var d1t = 0;
@@ -126,15 +130,19 @@ var d5t = 0;
 var d6t = 0;
 var d7t = 0;
 
+var twitter_color_R = 81;
+var twitter_color_G = 127;
+var twitter_color_B = 164;
+
 function getColor2(d) {
-	return d > d1t ? 'rgba(81, 127, 164, 1)' :
-		   d > d2t ? 'rgba(81, 127, 164, .875)' :
-		   d > d3t ? 'rgba(81, 127, 164, .75)' :
-		   d > d4t ? 'rgba(81, 127, 164, .625)' :
-		   d > d5t ? 'rgba(81, 127, 164, .50)' :
-		   d > d6t ? 'rgba(81, 127, 164, .375)' :
-		   d > d7t ? 'rgba(81, 127, 164, .25)' :
-			         'rgba(81, 127, 164, .125)';
+	return d > d1t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', 1)' :
+		   d > d2t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .875)' :
+		   d > d3t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .75)' :
+		   d > d4t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .625)' :
+		   d > d5t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .50)' :
+		   d > d6t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .375)' :
+		   d > d7t ? 'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .25)' :
+			         'rgba('+twitter_color_R+', '+twitter_color_G+', '+twitter_color_B+', .125)';
 }
 
 var opacity_google = 0.8;

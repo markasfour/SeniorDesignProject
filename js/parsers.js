@@ -30,7 +30,7 @@ function set_colors(max, min, color_template) {
 		d6g = max - (6 * range);
 		d7g = max - (7 * range);
 	}
-	else {
+	else if (color_template == "twitter") {
 		var range = max - min;
 		range = range / 7;
 		d1t = max - range;
@@ -76,7 +76,11 @@ function getWeights(toCalc, color_template){
 			}
 		}
 	}
-	
+	if (color_template == "twitter") {
+		console.log("max = ", max);
+		console.log("min = ", min);
+	}
+
 	//set color limits based off of max and min values
 	color_template == set_colors(max, min, color_template);
 
@@ -92,6 +96,7 @@ function getWeights(toCalc, color_template){
 
 function setMapData(new_weights, mapDensities){
   /*For item in our state*/
+  console.log(new_weights);
   for(i = 0; i < mapDensities["features"].length; i++){
     /*var abb = stateTranslationFA[mapDensities["features"][i]["properties"]["name"]];*/
 	
@@ -101,6 +106,7 @@ function setMapData(new_weights, mapDensities){
 		mapDensities["features"][i]["properties"]["density"] = new_weights[mapDensities["features"][i]["properties"]["name"]];
 	} else {
 		mapDensities["features"][i]["properties"]["density"] = 0;
+		console.log("HERE");
 	}
   }
 	
@@ -115,10 +121,10 @@ function setMapData(new_weights, mapDensities){
 	
   //twitter
   map.removeLayer(states_data_twitter);
-  //states_data_twitter = L.geoJson(TwitterStatesData, {
-  //	style: style2,
-  //	onEachFeature: onEachFeature
-  //});
+  states_data_twitter = L.geoJson(TwitterStatesData, {
+  	style: style2,
+  	onEachFeature: onEachFeature
+  });
   geo_json = states_data_twitter.addTo(map);
 	
 }

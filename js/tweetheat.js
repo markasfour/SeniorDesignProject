@@ -116,7 +116,9 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     $scope.google_loading = false;
     $rootScope.google_data = parseData(result.result);
 	  $scope.google_weights = getWeights($rootScope.google_data, "google");
+    console.log("setting google map data...");
     setMapData($scope.google_weights, GoogleStatesData);
+    console.log(GoogleStatesData);
 	});             
                                           
   var requestForTwitterData = heatFactory.getTwitterData($http);
@@ -124,15 +126,16 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     $scope.twitter_loading = false;
     $rootScope.twitter_data = parseData(result.result);
 	  $scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
+    console.log("setting twitter map data...");
     setMapData($scope.twitter_weights, TwitterStatesData);
-    console.log("twitterweights are", $scope.twitter_weights);
+    console.log(TwitterStatesData);
 	});
   
                                           
   $scope.$watch('[twitter_loading,google_loading]', function() {
-    console.log("twitter_loading changed!");
+    //console.log("twitter_loading changed!");
     if(!$scope.google_loading && !$scope.twitter_loading){
-      console.log("settingloadin false");
+      //console.log("setting loading to false");
       $scope.loading = false;
     }
     
