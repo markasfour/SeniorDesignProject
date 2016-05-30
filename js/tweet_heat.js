@@ -107,12 +107,12 @@ tweetheat.controller('timeSliderController', ['$scope', '$rootScope',
 	  max: 3,
 	  options: {
 		floor: 0,
-		ceil: 7
+		ceil: 31
 	  }
 	};	
 	
 	$scope.$watch('[slider.min, slider.max]', function() {
-    //console.log("watch went off  " + $scope.slider.min + " | " + $scope.slider.max);
+    console.log("watch went off  " + $scope.slider.min + " | " + $scope.slider.max);
     
     $rootScope.start_date = get_start_day(parseInt($scope.slider.min));
 		$rootScope.end_date = get_end_day(parseInt($scope.slider.max));
@@ -137,21 +137,25 @@ tweetheat.controller('twitterController', ['$scope', '$rootScope',
     /*twitter data loaded*/
     if($rootScope.twitter_data){
       $scope.keywords = [];
-      var start_date = get_start_day();
-      var end_date = get_end_day();
-	  console.log("start and end " + start_date + " | " + end_date)
+     
+	    console.log("start and end " + $rootScope.start_date + " | " + $rootScope.end_date)
+    
       /*each key is a keyword and its value is true false */
       for(var i = 0 ; i < $rootScope.twitter_data.length; i++){
-        //console.log("checking " + $rootScope.twitter_data[i]['timestamp'])
         /* check for within the time range */
-        if($rootScope.twitter_data[i].timestamp < end_date 
-		   && $rootScope.twitter_data[i].timestamp > start_date){
+        
+        console.log("checking " + $rootScope.start_date + " < "
+                    + to_date($rootScope.twitter_data[i]['timestamp']) + " > "
+                    + $rootScope.end_date);
+        if(to_date($rootScope.twitter_data[i].timestamp) < $rootScope.start_date
+		    && to_date($rootScope.twitter_data[i].timestamp) > $rootScope.end_date ){
 			
+          //console.log("checking " + $rootScope.twitter_data[i]['timestamp']);
           $scope.selection.push({keyword : $rootScope.twitter_data[i]['keyword'], selected : true} );
         }
       }
       loading = false;
-      console.log("selection is ", $scope.selection)
+      //console.log("selection is ", $scope.selection)
     }
   });
 
