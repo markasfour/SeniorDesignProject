@@ -1,11 +1,11 @@
 
-function get_start_day(slider_min){
-	var start_date = new Date();
+function get_new_day(slider_val){
+	var new_date = new Date();
 	
-	if(slider_min != 0){
-		start_date.setDate(start_date.getDate()+slider_min);
+	if(slider_val != 0){
+		new_date.setDate(new_date.getDate()-slider_val);
 	}
-	return start_date;
+	return new_date;
 	
 	/*
 	var dd = start_date.getDate();
@@ -20,21 +20,14 @@ function get_start_day(slider_min){
 	return yyyy+'-'+mm+'-'+dd;*/
 }
 
-function get_end_day(slider_max){
-	var end_date = new Date();
-	if(slider_max != 0){
-		end_date.setDate(end_date.getDate()+slider_max);
-	}
-	return end_date;
-}
 
 function to_date(string_date){
 	var parsedDate = new Date();
-	console.log("date is " + string_date)
+	//console.log("date is " + string_date)
 	times = string_date.split("-");
 	
 	parsedDate.setYear(parseInt(times[0]));
-	parsedDate.setMonth(parseInt(times[1]) +1);//January is 0
+	parsedDate.setMonth(parseInt(times[1]) - 1);//January is 0
 	parsedDate.setDate(parseInt(times[2]));
 	
 	parsedDate.setHours(0);  

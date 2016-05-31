@@ -98,95 +98,170 @@ tweetheat.factory('heatFactory', function(){
 
 });
 
-
+tweetheat.filter("dateRange", function() {
+  return function(items, start_date, end_date){
+    //console.log("ranging from " + start_date+ " to " + end_date);
+   
+    
+    var result = [];        
+    for (var i=0; i<items.length; i++){
+      
+      var date_f = to_date(items[i].timestamp),
+          date_t = to_date(items[i].timestamp);
+      //console.log("in range " + date_f + " | " + date_t);
+      
+      if (date_f > start_date && date_t < end_date)  {
+        
+      //console.log("SUCCESS!" );
+        result.push(items[i]);
+      }
+    }            
+    return result;
+                       
+  }
+  
+});
 
 tweetheat.controller('timeSliderController', ['$scope', '$rootScope',  
                                         function($scope,$rootScope){
 	$scope.slider = {
 	  min: 0,
-	  max: 3,
+	  max: 14,
 	  options: {
 		floor: 0,
-		ceil: 31
+		ceil: 14
 	  }
 	};	
 	
 	$scope.$watch('[slider.min, slider.max]', function() {
     console.log("watch went off  " + $scope.slider.min + " | " + $scope.slider.max);
     
-    $rootScope.start_date = get_start_day(parseInt($scope.slider.min));
-		$rootScope.end_date = get_end_day(parseInt($scope.slider.max));
+    $rootScope.start_date = get_new_day(parseInt($scope.slider.max));
+		$rootScope.end_date = get_new_day(parseInt($scope.slider.min));
 			
 		//console.log("set dates from " + $scope.slider.min + " | " + $scope.slider.max);
 		//console.log("set dates to " + $rootScope.start_date + " | " + $rootScope.end_date);
-		
-		
 	});
 }]);
 
+ /**
+   * filter for selection
+   */
+  tweetheat.filter('keywordSelection', ['filterFilter', function (filterFilter) {
+    return function keywordSelection(input, prop) {
+      return filterFilter(input, { selected: true }).map(function (keyword) {
+        return keyword[prop];
+      });
+    };
+  }]);
 
-
-
-
-tweetheat.controller('twitterController', ['$scope', '$rootScope', 
+tweetheat.controller('keywordsController', ['$scope', '$rootScope', 
                                         function($scope,$rootScope){
   $scope.maxKeywords = 100;
   $scope.loading = true;
+  $scope.loading_twitter = true;
+  $scope.loading_google = true;
                                           
-  $rootScope.$watch('twitter_data', function() {
-    /*twitter data loaded*/
+  $scope.keywords_twitter = [];
+  $scope.keywords_google_search = [];
+  $scope.keywords_google_hot = [];
+          
+  $scope.keywords_twitter_filtered = [];  
+  $scope.keywords_google_search_filtered = [];
+  $scope.keywords_google_hot_filtered = [];                                      
+  
+  // Get the min max date
+  
+                                          
+  /*after this keywords_twitter keywords_google_search and keywords_google_hot are set*/                          
+  $rootScope.$watch('twitter_data', function(){
+    //If we need to load twitter and data has been changed
     if($rootScope.twitter_data){
-      $scope.keywords = [];
-     
-	    console.log("start and end " + $rootScope.start_date + " | " + $rootScope.end_date)
-    
-      /*each key is a keyword and its value is true false */
-      for(var i = 0 ; i < $rootScope.twitter_data.length; i++){
-        /* check for within the time range */
+      var tmp_data = $scope.twitter_data;
+      var tmp_keywords_twitter = [];
+      var tmp_keywords_google_search = [];
+      var tmp_keywords_google_hot = [];
+      
+      /*get a list of keywords from twitter*/
+      for(var i = 0; i< tmp_data.length; i++){
+        var row = tmp_data[i];
+        row.selected = true;
         
-        console.log("checking " + $rootScope.start_date + " < "
-                    + to_date($rootScope.twitter_data[i]['timestamp']) + " > "
-                    + $rootScope.end_date);
-        if(to_date($rootScope.twitter_data[i].timestamp) < $rootScope.start_date
-		    && to_date($rootScope.twitter_data[i].timestamp) > $rootScope.end_date ){
-			
-          //console.log("checking " + $rootScope.twitter_data[i]['timestamp']);
-          $scope.selection.push({keyword : $rootScope.twitter_data[i]['keyword'], selected : true} );
+        if(tmp_data[i].origin == "Twitter Trends"){
+          tmp_keywords_twitter.push(row);
+        } else if(tmp_data[i].origin == "Google Search Trends"){
+          tmp_keywords_google_search.push(row);
+        } else {
+          tmp_keywords_google_hot.push(row);
         }
       }
-      loading = false;
-      //console.log("selection is ", $scope.selection)
+                            
+      $scope.keywords_twitter = tmp_keywords_twitter;
+      $scope.keywords_google_search = tmp_keywords_google_search;
+      $scope.keywords_google_hot = tmp_keywords_google_hot;
+      console.log($scope.keywords_google_search);
     }
   });
+                                          
+  // selected keywords
+  $scope.selection = [];
+    
+  // helper method
+  $scope.selectedKeywordsTwitter = function selectedKeywords() {
+    return filterFilter($scope.keywords, { selected: true });
+  };
+  $scope.selectedKeywordsHot = function selectedKeywords() {
+    return filterFilter($scope.keywords, { selected: true });
+  };
+  $scope.selectedKeywordsSearch = function selectedKeywords() {
+    return filterFilter($scope.keywords, { selected: true });
+  };
+    
+  // watch keywords for changes
+  $scope.$watch('keywords_twitter|filter:{selected:true}', function (nv) {
+    $scope.selection = nv.map(function (keywords_twitter) {
+      return keywords_twitter.keyword;
+   });
+  }, true);
+          
+          
+  // The filtered variables are set here
+  /*$rootScope.$watch('[start_date,end_date]', function() {
+                    
+    //twitter data loaded
+    if($scope.keywords_twitter.length != 0){
+      var tmp_keywords = keywords_twitter;
+      
+	    console.log("start and end " + $rootScope.start_date + " | " + $rootScope.end_date)
+      
+      //each key is a keyword and its value is true false 
+      for(var i = 0 ; i < tmp_keywords.length; i++)
+      {
+        // check for within the time range 
+        var timestamp_date = to_date(tmp_keywords[i].timestamp);
+        
+        if(  timestamp_date < $rootScope.start_date
+		      && timestamp_date > $rootScope.end_date )
+        {
+          
+			    console.log("checking " + $rootScope.start_date + " < "
+                    + timestamp_date + " > "
+                    + $rootScope.end_date);
+        
+          //console.log("checking " + $rootScope.twitter_data[i]['timestamp']);
+          $scope.selection.push();
+        }
+      }
+      $scope.keywords = tmp_keywords;
+      $scope.loading = false;
+      console.log("selection is ", $scope.selection)
+    }
+  });*/
+                                          
+                                          
+                                         
 
 }]);
-
-tweetheat.controller('googleHotController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactory){
-  $scope.maxKeywords = 100; 
-  $scope.loading = true; 
-  
-  var requestForGoogleHotKeywords = heatFactory.getGoogleHotKeywords($http);
-  requestForGoogleHotKeywords.then( function(result) {
-    $scope.loading = false;
-    $scope.googleHotKeywords = result.result;  
-  });
-}]);
-
-tweetheat.controller('googleSearchController', ['$scope', '$http', '$q', 'heatFactory', 
-                                        function($scope,$http,$q, heatFactory){
-  $scope.maxKeywords = 100;
-  $scope.loading = true;
-  var requestForGoogleSearchKeywords = heatFactory.getGoogleSearchKeywords($http);
-  //console.log("inside search controller");
-  //$scope.print("test");
-  requestForGoogleSearchKeywords.then( function(result) {
-    $scope.loading = false;
-    $scope.googleSearchKeywords = result.result;
-  });
-
-}]);
-
 
 tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
                                         function($scope, $rootScope, $http,$q, heatFactory){

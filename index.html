@@ -39,7 +39,6 @@
 	<!--JS-->
 	<script src="js/stateTranslation.js" type="text/javascript"></script>
 	<script src="js/time_bounds.js" type="text/javascript"></script>
-	<script src="js/parsers.js" type="text/javascript"></script>
 	
 	<!-- APP -->
 	<script type="text/javascript" src="js/app/tweet_heat_slider.js"></script>
@@ -144,86 +143,100 @@
 		<!--<div id="time-range"></div>
 			From <i id="time-range-value1"></i> days ago<br>
 			To <i id="time-range-value2"></i> days ago-->
-		<div > 
-			<div ng-controller="timeSliderController">
-				<rzslider
-					rz-slider-model="slider.min"
-					rz-slider-high="slider.max"
-					rz-slider-options="slider.options"></rzslider>
-			</div>
+		
+		<div ng-controller="timeSliderController">
+			<rzslider
+				rz-slider-model="slider.min"
+				rz-slider-high="slider.max"
+				rz-slider-options="slider.options"></rzslider>
 		</div>
 		
 		
 		<hr>
-
-		<!-- Twitter Trends -->
-		<div ng-controller="twitterController" class="trend"> 
-		<div class="accordion">
-			<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
-				background-image: linear-gradient(to right, rgba(0, 172, 237, 0), rgba(0, 172, 237, 0.5), rgba(0, 172, 237, 0));">
-					<hr>
-					<i class="fa fa-twitter" aria-hidden="true"></i>
-					<p style="font-size: 8px; margin: 0 auto;">Twitter Trends</p>
-					<hr>
-			</div>	
-		</div>
-		<div class="panel">
-			<form name="Twitter_Trends" class="keywordList" ng-hide="loading">
-				<li ng-repeat="keyword in twitterKeywords | limitTo:maxKeywords"><label><input type="checkbox" name=""> {{keyword}}</label></li>
-			</form>
-			<div class="loading-pulse animate-hide" ng-show="loading"></div>
-			</div>
-		</div>
-			
-		<!-- Google Hot Trends -->
-		<div ng-controller="googleHotController" class="trend">
-		<div class="accordion">
-			<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
-				background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0));">
-				<hr>
-				<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-fire" aria-hidden="true"></i>
-				<p style="font-size: 8px; margin: 0 auto;">Google Hot Trends</p>
-				<hr>
-			</div>	
-		</div>
-		<div class="panel">
-			<form name="Hot_Trends" class="keywordList" ng-hide="loading">
-         	 	
-			
-
-				<li ng-repeat="row in keywords">
-					{{keyword}}
-					<<label>
-						<input type="checkbox" ng-model="selection.keywords[item.keyword]" name="group" id="{{item.keyword}}" />
-						{{item.keyword}}
-					</label>
-    			</li>
-
-			</form>
-			<div class="loading-pulse animate-hide" ng-show="loading"></div>
-		</div>
-		</div>
 		
-		<!-- Google Search Trends -->
-		<div ng-controller="googleSearchController" class="trend">
-		<div class="accordion">
-			<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
-				background-image: linear-gradient(to right, rgba(0, 135, 68, 0), rgba(0, 135, 68, 0.5), rgba(0, 135, 68, 0));">
-				<hr>
-				<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i>
-				<p style="font-size: 8px; margin: 0 auto;">Google Search Trends</p>
-				<hr>
+		<div ng-controller="keywordsController">
+			<!-- Twitter Trends -->
+			<div class="trend"> 
+				<div class="accordion">
+					<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
+						background-image: linear-gradient(to right, rgba(0, 172, 237, 0), rgba(0, 172, 237, 0.5), rgba(0, 172, 237, 0));">
+							<hr>
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+							<p style="font-size: 8px; margin: 0 auto;">Twitter Trends</p>
+							<hr>
+					</div>	
+				</div>
+				<div class="panel">
+					<form name="Twitter_Trends" class="keywordList" ng-show="keywords_twitter.length > 0">
+						<li ng-repeat="row in keywords_twitter | dateRange:start_date:end_date | orderBy:count | limitTo:maxKeywords">
+							
+							<label><input
+								type="checkbox"
+								name="selectedKeywordsTwitter[]"
+								value="{{row.keyword}}"
+								ng-model="row.selected"> {{row.keyword}}</label>
+							
+							<!--<input type="checkbox" name="selected"> {{row.keyword}}-->
+						</li>
+					</form>
+					<div class="loading-pulse animate-hide" ng-show="keywords_twitter.length == 0"></div>
+				</div>
+			</div>
+
+			<!-- Google Hot Trends -->
+			<div class="trend">
+				<div class="accordion">
+					<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
+						background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0));">
+						<hr>
+						<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-fire" aria-hidden="true"></i>
+						<p style="font-size: 8px; margin: 0 auto;">Google Hot Trends</p>
+						<hr>
+					</div>	
+				</div>
+				<div class="panel">
+				<form name="Hot_Trends" class="keywordList" ng-show="keywords_google_hot.length > 0">
+					<li ng-repeat="row in keywords_google_hot | dateRange:start_date:end_date | orderBy:count | limitTo:maxKeywords">
+						<label><input
+							type="checkbox"
+							name="selectedKeywordsHot[]"
+							value="{{row.keyword}}"
+							ng-model="row.selected"> {{row.keyword}}</label>
+							
+						<!--<input type="checkbox" name="selected"> {{row.keyword}}-->
+					</li>
+				</form>
+				<div class="loading-pulse animate-hide" ng-show="keywords_google_hot.length == 0"></div>
+				</div>
+			</div>
+
+			<!-- Google Search Trends -->
+			<div class="trend">
+				<div class="accordion">
+					<div style="margin: 0 auto; text-align: center; font-size: 20px; text-shadow: 0 0 1px #000000;
+						background-image: linear-gradient(to right, rgba(0, 135, 68, 0), rgba(0, 135, 68, 0.5), rgba(0, 135, 68, 0));">
+						<hr>
+						<i class="fa fa-google" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i>
+						<p style="font-size: 8px; margin: 0 auto;">Google Search Trends</p>
+						<hr>
+					</div>
+				</div>
+				<div class="panel">
+					<form name="Search_Trends" class="keywordList" ng-show="keywords_google_search.length > 0">
+						<li ng-repeat="row in keywords_google_search | dateRange:start_date:end_date | orderBy:count | limitTo:maxKeywords">
+						<label><input
+							type="checkbox"
+							name="selectedKeywordsSearch[]"
+							value="{{row.keyword}}"
+							ng-model="row.selected"> {{row.keyword}}</label>
+							
+						<!--<input type="checkbox" name="selected"> {{row.keyword}}-->
+						</li>
+					</form>
+					<div class="loading-pulse animate-hide" ng-show="keywords_google_search.length == 0"></div>
+				</div>
 			</div>
 		</div>
-		<div class="panel">
-			<form name="Search_Trends" >
-				<div class="keywordList" ng-hide="loading">
-      			<li ng-repeat="keyword in googleSearchKeywords | limitTo:maxKeywords" ><label><input type="checkbox"  name=""> {{keyword}}</label></li>
-				</div>		
-			</form>
-			<div class="loading-pulse animate-hide" ng-show="loading"></div>
-		</div>
-		</div>	
 	</div>
 
 
