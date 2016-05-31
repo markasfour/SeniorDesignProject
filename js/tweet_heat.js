@@ -208,13 +208,40 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
   /*after this keywords_twitter keywords_google_search and keywords_google_hot are set*/                          
   $rootScope.$watch('twitter_data', function(){
     //If we need to load twitter and data has been changed
-    if($rootScope.twitter_data){
+    if($rootScope.twitter_data && $scope.loading_twitter){
       var tmp_data = $scope.twitter_data;
+      
+      /*get a list of keywords from twitter*/
+      for(var i = 0; i< tmp_data.length; i++){
+        var row = tmp_data[i];
+        
+        if(tmp_data[i].origin == "Twitter Trends")
+        {
+          $scope.keywords_twitter.push(row);
+        } 
+        else if(tmp_data[i].origin == "Google Search Trends")
+        {
+          $scope.keywords_google_search.push(row);
+        } 
+        else 
+        {
+          $scope.keywords_google_hot.push(row);
+        }
+      }
+      
+      $scope.loading_twitter = false;
+    } 
+  });
+                                          
+  /*after this keywords_twitter keywords_google_search and keywords_google_hot are set*/                          
+  /*$rootScope.$watch('google_data', function(){
+    //If we need to load twitter and data has been changed
+    if($rootScope.google_data && $scope.loading_twitter){
+      var tmp_data = $scope.google_data;
       var tmp_keywords_twitter = [];
       var tmp_keywords_google_search = [];
       var tmp_keywords_google_hot = [];
       
-      /*get a list of keywords from twitter*/
       for(var i = 0; i< tmp_data.length; i++){
         var row = tmp_data[i];
         
@@ -227,10 +254,20 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
         }
       }
                             
-      $scope.keywords_twitter = markHidden(tmp_keywords_twitter);
-      $scope.keywords_google_search = markHidden(tmp_keywords_google_search);
-      $scope.keywords_google_hot = markHidden(tmp_keywords_google_hot);
-      //console.log(reduceByKeyword($scope.keywords_google_search));
+      $scope.keywords_twitter = keywords_twitter.concat(tmp_keywords_twitter);
+      $scope.keywords_google_search = keywords_twitter.concat(tmp_keywords_google_search);
+      $scope.keywords_google_hot = keywords_twitter.concat(tmp_keywords_google_hot);
+      
+      $scope.loading_google = false;
+    } 
+  });*/
+                                          
+  $scope.$watch('[loading_google, loading_twitter]', function(){
+    if(!$scope.loading_google && !$scope.loading_twitter){
+      $scope.keywords_twitter = markHidden($scope.keywords_twitter);
+      $scope.keywords_google_search = markHidden($scope.keywords_google_search);
+      $scope.keywords_google_hot = markHidden($scope.keywords_google_hot);
+      $scope.loading = false;
     }
   });
                                           
@@ -292,17 +329,11 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
   $scope.google_loading = true;
   $scope.twitter_loading = true;
                                           
-  /*var requestForGoogleData = heatFactory.getGoogleData($http);
+  var requestForGoogleData = heatFactory.getGoogleData($http);
   requestForGoogleData.then( function(result) {
     $rootScope.google_data = parseData(result.result);
-	  $scope.google_weights = getWeights($rootScope.google_data, "google");
-    //console.log("setting google map data...");
-    setMapData($scope.google_weights, GoogleStatesData);
     $scope.google_loading = false;
-    //console.log(GoogleStatesData);
-	});   */          
-   $scope.google_loading = false;
-                                          
+	});  
                                           
   var requestForTwitterData = heatFactory.getTwitterData($http);
   requestForTwitterData.then( function(result) {
@@ -317,7 +348,9 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     {
         console.log("setting twitter map data...");
         setMapData(getWeights($rootScope.twitter_data, $rootScope.selection, "twitter"), TwitterStatesData);
-       
+        console.log("setting google map data...");
+        setMapData(getWeights($rootScope.google_data, $rootScope.selection, "google"), GoogleStatesData);
+
     }
   });
                                           

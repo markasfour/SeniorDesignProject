@@ -14,7 +14,7 @@ function parseData(toParse){
                  "state":items[3],
                  "count":items[4],
 				 "selected":false,
-				 "hidden": true})
+				 "hidden": false})
   }
   return parsed;
 }
