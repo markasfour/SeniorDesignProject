@@ -12,7 +12,8 @@ function parseData(toParse){
                  "timestamp":items[1],
                  "origin":items[2],
                  "state":items[3],
-                 "count":items[4]})
+                 "count":items[4],
+				 "selected":false})
   }
   return parsed;
 }
@@ -49,20 +50,27 @@ function set_colors(max, min, color_template) {
 	Convert from our table to average weights per state
 */
 function getWeights(toCalc, color_template){
+	if(!toCalc){
+		return null;
+	}
+	
 	var mapCount   = {};
 	var mapWeights = {};
 	var max = 0;
 	var min = 101;
 	for (i = 0; i < toCalc.length; i ++){
-		/* check to see if it is initialized*/
-		if(mapWeights.hasOwnProperty(toCalc[i].state)){
-			mapWeights[toCalc[i].state]	= mapWeights[toCalc[i].state] + parseInt(toCalc[i].count);
-			mapCount[toCalc[i].state]	= mapCount[toCalc[i].state] + 1;
-		} else {
-			mapWeights[toCalc[i].state]	= parseInt(toCalc[i].count);
-			mapCount[toCalc[i].state]	= 1;	
+		if(toCalc[i].hasOwnProperty("selected") && toCalc[i]["selected"]){
+			/* check to see if it is initialized*/
+			if(mapWeights.hasOwnProperty(toCalc[i].state)){
+				mapWeights[toCalc[i].state]	= mapWeights[toCalc[i].state] + parseInt(toCalc[i].count);
+				mapCount[toCalc[i].state]	= mapCount[toCalc[i].state] + 1;
+			} else {
+				mapWeights[toCalc[i].state]	= parseInt(toCalc[i].count);
+				mapCount[toCalc[i].state]	= 1;	
+			}
 		}
 	}
+
 	
 	/* now calc the averages*/
 	for (var state in mapWeights) {
@@ -84,7 +92,7 @@ function getWeights(toCalc, color_template){
 	//set color limits based off of max and min values
 	color_template == set_colors(max, min, color_template);
 
-	//console.log("MapWeights are ", mapWeights)
+	console.log("MapWeights are ", mapWeights)
 	
 	return mapWeights;
 }
@@ -95,27 +103,40 @@ function getWeights(toCalc, color_template){
 */
 
 function setMapData(new_weights, mapDensities){
+ 
+	
   /*For item in our state*/
-  //console.log("NEW WEIGHTS", new_weights);
+  console.log("NEW WEIGHTS", new_weights);
   //console.log("MAP DENSITIES", mapDensities);
   
   for(i = 0; i < mapDensities["features"].length; i++){
     
-    //console.log(mapDensities["features"][i]["properties"]["name"]);
+    //console.log("state name "+mapDensities["features"][i]["properties"]["name"]);
     //console.log(stateTranslationFA[mapDensities["features"][i]["properties"]["name"]]);
 
     /*var abb = stateTranslationFA[mapDensities["features"][i]["properties"]["name"]];*/
 	
-	  /* If we find new weight set it to that otherwise set to 0*/
-	if(new_weights.hasOwnProperty(mapDensities["features"][i]["properties"]["name"])){
+	  
+	if(!new_weights){
+	  //new_weights is not set
+	  mapDensities["features"][i]["properties"]["density"] = 0;
+	} 
+	  else if(new_weights.hasOwnProperty(mapDensities["features"][i]["properties"]["name"]))
+	{
+		//new weights does have an attribute for the state
 		//console.log("setting property", mapDensities["features"][i]["properties"]["name"], new_weights[mapDensities["features"][i]["properties"]["name"]]);
 		mapDensities["features"][i]["properties"]["density"] = new_weights[mapDensities["features"][i]["properties"]["name"]];
-	} else if (new_weights.hasOwnProperty(stateTranslationFA[mapDensities["features"][i]["properties"]["name"]])) {
+	} 
+	  else if (new_weights.hasOwnProperty(stateTranslationFA[mapDensities["features"][i]["properties"]["name"]])) 
+	{
+		//see if we need to translate
 		mapDensities["features"][i]["properties"]["density"] = new_weights[stateTranslationFA[mapDensities["features"][i]["properties"]["name"]]];	
 		//console.log(new_weights[stateTranslationFA[mapDensities["features"][i]["properties"]["name"]]]);
-	} else {
+	} 
+	  else 
+	{
 		mapDensities["features"][i]["properties"]["density"] = 0;
-		console.log("HERE");
+		//console.log("HERE");
 	}
   }
 	

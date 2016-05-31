@@ -114,6 +114,8 @@ tweetheat.filter("dateRange", function() {
         
       //console.log("SUCCESS!" );
         result.push(items[i]);
+      } else {
+        items[i]["selected"] = false;
       }
     }            
     return result;
@@ -165,13 +167,6 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
   $scope.keywords_twitter = [];
   $scope.keywords_google_search = [];
   $scope.keywords_google_hot = [];
-          
-  $scope.keywords_twitter_filtered = [];  
-  $scope.keywords_google_search_filtered = [];
-  $scope.keywords_google_hot_filtered = [];                                      
-  
-  // Get the min max date
-  
                                           
   /*after this keywords_twitter keywords_google_search and keywords_google_hot are set*/                          
   $rootScope.$watch('twitter_data', function(){
@@ -185,7 +180,6 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
       /*get a list of keywords from twitter*/
       for(var i = 0; i< tmp_data.length; i++){
         var row = tmp_data[i];
-        row.selected = true;
         
         if(tmp_data[i].origin == "Twitter Trends"){
           tmp_keywords_twitter.push(row);
@@ -199,7 +193,7 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
       $scope.keywords_twitter = tmp_keywords_twitter;
       $scope.keywords_google_search = tmp_keywords_google_search;
       $scope.keywords_google_hot = tmp_keywords_google_hot;
-      console.log($scope.keywords_google_search);
+      //console.log($scope.keywords_google_search);
     }
   });
                                           
@@ -216,6 +210,13 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
   $scope.selectedKeywordsSearch = function selectedKeywords() {
     return filterFilter($scope.keywords, { selected: true });
   };
+                                          
+  $rootScope.$watch('twitter_data', function(){
+    //console.log("twitter_data is ", $rootScope.twitter_data);
+  });                                      
+  //$scope.$watch('selection', function(){
+    //console.log("selection is ", $rootScope.twitter_data);
+  //});
     
   // watch keywords for changes
   $scope.$watch('keywords_twitter|filter:{selected:true}', function (nv) {
@@ -223,44 +224,6 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
       return keywords_twitter.keyword;
    });
   }, true);
-          
-          
-  // The filtered variables are set here
-  /*$rootScope.$watch('[start_date,end_date]', function() {
-                    
-    //twitter data loaded
-    if($scope.keywords_twitter.length != 0){
-      var tmp_keywords = keywords_twitter;
-      
-	    console.log("start and end " + $rootScope.start_date + " | " + $rootScope.end_date)
-      
-      //each key is a keyword and its value is true false 
-      for(var i = 0 ; i < tmp_keywords.length; i++)
-      {
-        // check for within the time range 
-        var timestamp_date = to_date(tmp_keywords[i].timestamp);
-        
-        if(  timestamp_date < $rootScope.start_date
-		      && timestamp_date > $rootScope.end_date )
-        {
-          
-			    console.log("checking " + $rootScope.start_date + " < "
-                    + timestamp_date + " > "
-                    + $rootScope.end_date);
-        
-          //console.log("checking " + $rootScope.twitter_data[i]['timestamp']);
-          $scope.selection.push();
-        }
-      }
-      $scope.keywords = tmp_keywords;
-      $scope.loading = false;
-      console.log("selection is ", $scope.selection)
-    }
-  });*/
-                                          
-                                          
-                                         
-
 }]);
 
 tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
@@ -269,7 +232,7 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
   $scope.google_loading = true;
   $scope.twitter_loading = true;
                                           
-  var requestForGoogleData = heatFactory.getGoogleData($http);
+  /*var requestForGoogleData = heatFactory.getGoogleData($http);
   requestForGoogleData.then( function(result) {
     $rootScope.google_data = parseData(result.result);
 	  $scope.google_weights = getWeights($rootScope.google_data, "google");
@@ -277,18 +240,40 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     setMapData($scope.google_weights, GoogleStatesData);
     $scope.google_loading = false;
     //console.log(GoogleStatesData);
-	});             
+	});   */          
+   $scope.google_loading = false;
+                                          
                                           
   var requestForTwitterData = heatFactory.getTwitterData($http);
   requestForTwitterData.then( function(result) {
     $rootScope.twitter_data = parseData(result.result);
-	  $scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
+	  //$scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
     //console.log("setting twitter map data...");
-    setMapData($scope.twitter_weights, TwitterStatesData);
+    //setMapData($scope.twitter_weights, TwitterStatesData);
     $scope.twitter_loading = false;
     //console.log(TwitterStatesData);
 	});
   
+                                          
+  // watch the loading and changes in selection and min_max
+  $rootScope.$watch('[start_date, end_date]', function(newValue, oldValue){
+    //console.log("new Value", newValue);
+    //console.log("old Value", oldValue);
+    if(!$scope.twitter_loading)
+    {
+      //console.log("in watch start end, selection",$rootScope.twitter_data);
+      var tmp_data = $rootScope.twitter_data
+      //var tmp_selection = $rootScope.selection  
+
+
+      if(tmp_data && $rootScope.start_date 
+         && $rootScope.end_date)
+      {
+        console.log("setting twitter map data...");
+        setMapData(getWeights(tmp_data, "twitter"), TwitterStatesData);
+      }
+    }
+  });
                                           
   $scope.$watch('[twitter_loading,google_loading]', function() {
     //console.log("twitter_loading changed!");
