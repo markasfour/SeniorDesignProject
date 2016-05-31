@@ -13,9 +13,24 @@ function parseData(toParse){
                  "origin":items[2],
                  "state":items[3],
                  "count":items[4],
-				 "selected":false})
+				 "selected":false,
+				 "hidden": true})
   }
   return parsed;
+}
+
+function markHidden(toMark){
+	var checkingSet = new Set();
+	for(var i = 0; i < toMark.length; i++){
+		//We have not seen this keyword before mark hidden as true
+		//If the keyword is not in our checking set
+		if(!checkingSet.has(toMark[i].keyword)){
+			toMark[i].hidden = false;
+			checkingSet.add(toMark[i].keyword);
+		}
+	}
+	
+	return toMark;
 }
 
 
@@ -49,17 +64,20 @@ function set_colors(max, min, color_template) {
 	toCalc should be parsed after filtering
 	Convert from our table to average weights per state
 */
-function getWeights(toCalc, color_template){
+function getWeights(toCalc, selected, color_template){
 	if(!toCalc){
 		return null;
 	}
+	var toCheckIn = new Set(selected);
 	
 	var mapCount   = {};
 	var mapWeights = {};
 	var max = 0;
 	var min = 101;
 	for (i = 0; i < toCalc.length; i ++){
-		if(toCalc[i].hasOwnProperty("selected") && toCalc[i]["selected"]){
+		// See if it is in our checked set (this way we get all values from the range)
+		// See if it is deleselcted but its still checked (in this case we do not include it)
+		if(toCalc[i].hasOwnProperty("selected") && toCheckIn.has(toCalc[i].keyword)){
 			/* check to see if it is initialized*/
 			if(mapWeights.hasOwnProperty(toCalc[i].state)){
 				mapWeights[toCalc[i].state]	= mapWeights[toCalc[i].state] + parseInt(toCalc[i].count);

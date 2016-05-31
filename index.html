@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.min.js"></script> <!--For making rest calls-->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.5/angular-filter.min.js"></script> <!-- filtering -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-animate.min.js"></script> <!-- ng-shyow/ng-hide -->
@@ -168,9 +168,9 @@
 				</div>
 				<div class="panel">
 					<form name="Twitter_Trends" class="keywordList" ng-show="keywords_twitter.length > 0">
-						<li ng-repeat="row in keywords_twitter | dateRange:start_date:end_date | orderBy:count | limitTo:maxKeywords">
+						<li ng-repeat="row in keywords_twitter | dateRange:start_date:end_date| orderBy:'-count' | limitTo:maxKeywords">
 							
-							<label><input
+							<label ng-hide="row.hidden"><input
 								type="checkbox"
 								name="selectedKeywordsTwitter[]"
 								value="{{row.keyword}}"
@@ -196,8 +196,8 @@
 				</div>
 				<div class="panel">
 				<form name="Hot_Trends" class="keywordList" ng-show="keywords_google_hot.length > 0">
-					<li ng-repeat="row in keywords_google_hot | dateRange:start_date:end_date | orderBy:count | limitTo:maxKeywords">
-						<label><input
+					<li ng-repeat="row in keywords_google_hot | dateRange:start_date:end_date | orderBy:'-count' | limitTo:maxKeywords">
+						<label ng-hide="row.hidden"><input
 							type="checkbox"
 							name="selectedKeywordsHot[]"
 							value="{{row.keyword}}"
@@ -223,8 +223,8 @@
 				</div>
 				<div class="panel">
 					<form name="Search_Trends" class="keywordList" ng-show="keywords_google_search.length > 0">
-						<li ng-repeat="row in keywords_google_search | dateRange:start_date:end_date | orderBy:count | limitTo:maxKeywords">
-						<label><input
+						<li ng-repeat="row in keywords_google_search | dateRange:start_date:end_date | orderBy:'-count' | limitTo:maxKeywords">
+						<label ng-hide="row.hidden"><input
 							type="checkbox"
 							name="selectedKeywordsSearch[]"
 							value="{{row.keyword}}"

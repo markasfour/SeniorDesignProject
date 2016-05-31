@@ -124,6 +124,43 @@ tweetheat.filter("dateRange", function() {
   
 });
 
+tweetheat.filter("reduceByKeyword", function(){
+  return function(items){
+    var toReturn = {};
+    for(var i = 0; i < items.length; i++){
+      if(toReturn.hasOwnProperty(items.keyword)){
+
+        toReturn[items[i].keyword] = items[i].count + toReturn[items[i].keyword];
+      }
+      else
+      {
+        toReturn[items[i].keyword] = items[i].count;	
+      }
+    }
+
+    var arrayedValues = Object.keys(toReturn).map(function(k) { return {"keyword":k,
+                                      "count":toReturn[k]} });
+    return arrayedValues;
+                       
+  }
+  
+});
+
+//http://stackoverflow.com/questions/18381944/ng-options-and-unique-filter-not-displaying-angular-js/18382680#18382680
+/*tweetheat.filter('unique', function() {
+    return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});*/
+
 tweetheat.controller('timeSliderController', ['$scope', '$rootScope',  
                                         function($scope,$rootScope){
 	$scope.slider = {
@@ -190,10 +227,10 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
         }
       }
                             
-      $scope.keywords_twitter = tmp_keywords_twitter;
-      $scope.keywords_google_search = tmp_keywords_google_search;
-      $scope.keywords_google_hot = tmp_keywords_google_hot;
-      //console.log($scope.keywords_google_search);
+      $scope.keywords_twitter = markHidden(tmp_keywords_twitter);
+      $scope.keywords_google_search = markHidden(tmp_keywords_google_search);
+      $scope.keywords_google_hot = markHidden(tmp_keywords_google_hot);
+      //console.log(reduceByKeyword($scope.keywords_google_search));
     }
   });
                                           
@@ -240,6 +277,7 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
                                           
   $scope.$watch('[selectionKeywordsTwitter.length,selectionKeywordsHot.length,selectionKeywordsSearch.length]', function(){
     if($scope.selectionKeywordsTwitter && $scope.selectionKeywordsHot && $scope.selectionKeywordsSearch){
+
       $rootScope.selection =  $scope.selectionKeywordsTwitter.concat($scope.selectionKeywordsHot).concat($scope.selectionKeywordsSearch);
       console.log("Selection is ", $rootScope.selection);
     }
@@ -269,31 +307,17 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
   var requestForTwitterData = heatFactory.getTwitterData($http);
   requestForTwitterData.then( function(result) {
     $rootScope.twitter_data = parseData(result.result);
-	  //$scope.twitter_weights = getWeights($rootScope.twitter_data, "twitter");
-    //console.log("setting twitter map data...");
-    //setMapData($scope.twitter_weights, TwitterStatesData);
     $scope.twitter_loading = false;
-    //console.log(TwitterStatesData);
 	});
   
                                           
   // watch the loading and changes in selection and min_max
   $rootScope.$watch('[start_date, end_date, selection.length]', function(){
-    //console.log("new Value", newValue);
-    //console.log("old Value", oldValue);
     if(!$scope.twitter_loading)
     {
-      //console.log("in watch start end, selection",$rootScope.twitter_data);
-      var tmp_data = $rootScope.twitter_data
-      //var tmp_selection = $rootScope.selection  
-
-
-      if(tmp_data && $rootScope.start_date 
-         && $rootScope.end_date)
-      {
         console.log("setting twitter map data...");
-        setMapData(getWeights(tmp_data, "twitter"), TwitterStatesData);
-      }
+        setMapData(getWeights($rootScope.twitter_data, $rootScope.selection, "twitter"), TwitterStatesData);
+       
     }
   });
                                           
