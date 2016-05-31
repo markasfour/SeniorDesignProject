@@ -198,32 +198,54 @@ tweetheat.controller('keywordsController', ['$scope', '$rootScope',
   });
                                           
   // selected keywords
-  $scope.selection = [];
+  $scope.selectionKeywordsTwitter = [];
+  $scope.selectionKeywordsHot = [];
+  $scope.selectionKeywordsSearch = [];
+  //$scope.selection = [];
     
   // helper method
-  $scope.selectedKeywordsTwitter = function selectedKeywords() {
-    return filterFilter($scope.keywords, { selected: true });
+  $scope.selectedKeywordsTwitter = function selectedKeywordsTwitter() {
+    return filterFilter($scope.keywords_twitter, { selected: true });
   };
-  $scope.selectedKeywordsHot = function selectedKeywords() {
-    return filterFilter($scope.keywords, { selected: true });
+  $scope.selectedKeywordsHot = function selectedKeywordsHot() {
+    return filterFilter($scope.keywords_google_hot, { selected: true });
   };
-  $scope.selectedKeywordsSearch = function selectedKeywords() {
-    return filterFilter($scope.keywords, { selected: true });
+  $scope.selectedKeywordsSearch = function selectedKeywordsSearch() {
+    return filterFilter($scope.keywords_google_search, { selected: true });
   };
                                           
-  $rootScope.$watch('twitter_data', function(){
+  //$rootScope.$watch('twitter_data', function(){
     //console.log("twitter_data is ", $rootScope.twitter_data);
-  });                                      
-  //$scope.$watch('selection', function(){
-    //console.log("selection is ", $rootScope.twitter_data);
-  //});
+  //});                                      
+  $scope.$watch('selection', function(){
+    console.log("selection is ", $scope.selection);
+  });
     
   // watch keywords for changes
   $scope.$watch('keywords_twitter|filter:{selected:true}', function (nv) {
-    $scope.selection = nv.map(function (keywords_twitter) {
+    $scope.selectionKeywordsTwitter = nv.map(function (keywords_twitter) {
       return keywords_twitter.keyword;
    });
   }, true);
+  $scope.$watch('keywords_google_search|filter:{selected:true}', function (nv) {
+    $scope.selectionKeywordsHot = nv.map(function (keywords_google_search) {
+      return keywords_google_search.keyword;
+   });
+  }, true);
+  $scope.$watch('keywords_google_hot|filter:{selected:true}', function (nv) {
+    $scope.selectionKeywordsSearch = nv.map(function (keywords_google_hot) {
+      return keywords_google_hot.keyword;
+   });
+  }, true);
+                                          
+  $scope.$watch('[selectionKeywordsTwitter.length,selectionKeywordsHot.length,selectionKeywordsSearch.length]', function(){
+    if($scope.selectionKeywordsTwitter && $scope.selectionKeywordsHot && $scope.selectionKeywordsSearch){
+      $rootScope.selection =  $scope.selectionKeywordsTwitter.concat($scope.selectionKeywordsHot).concat($scope.selectionKeywordsSearch);
+      console.log("Selection is ", $rootScope.selection);
+    }
+  });
+ 
+  
 }]);
 
 tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'heatFactory', 
@@ -256,7 +278,7 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
   
                                           
   // watch the loading and changes in selection and min_max
-  $rootScope.$watch('[start_date, end_date]', function(newValue, oldValue){
+  $rootScope.$watch('[start_date, end_date, selection.length]', function(){
     //console.log("new Value", newValue);
     //console.log("old Value", oldValue);
     if(!$scope.twitter_loading)
