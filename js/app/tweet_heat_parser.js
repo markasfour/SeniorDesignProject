@@ -73,6 +73,7 @@ function getWeights(toCalc, color_template){
 
 	
 	/* now calc the averages*/
+	var state_cntr = 0;
 	for (var state in mapWeights) {
 		if(mapWeights.hasOwnProperty(state)){
 			mapWeights[state] = mapWeights[state] / mapCount[state]	;
@@ -82,8 +83,14 @@ function getWeights(toCalc, color_template){
 			if (mapWeights[state] < min) {
 				min = mapWeights[state];
 			}
-		}
+		} 
+		state_cntr++;
 	}
+	
+	if(state_cntr < 50){
+		min = 0;
+	}
+	
 	if (color_template == "twitter") {
 		console.log("max = ", max);
 		console.log("min = ", min);
