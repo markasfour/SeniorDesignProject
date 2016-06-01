@@ -147,11 +147,12 @@ function getColor2(d) {
 
 var opacity_google = 0.8;
 var opacity_twitter = 0.8;
+var border_opacity = 1;
 
 function style1(feature, x) {
 	return {
 		weight: 2,
-		opacity: 1,
+		opacity: border_opacity,
 		color: 'white',
 		dashArray: '3',
 		fillOpacity: opacity_google,
@@ -162,7 +163,7 @@ function style1(feature, x) {
 function style2(feature, x) {
 	return {
 		weight: 2,
-		opacity: 1,
+		opacity: border_opacity,
 		color: 'white',
 		dashArray: '3',
 		fillOpacity: opacity_twitter,
