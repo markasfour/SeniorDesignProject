@@ -30,7 +30,7 @@ function changeColorScheme(color_scheme){
 	var b4 = b2;
 	var a4 = a2;
 	
-	if (value == "default") {
+	if (value === "default") {
 		r1 = 0;
 		g1 = 172;
 		b1 = 237;
@@ -51,7 +51,7 @@ function changeColorScheme(color_scheme){
 		b4 = b2;
 		a4 = a2;
 	}
-	else if (value == "dark") {
+	else if (value === "dark") {
 		r1 = 0;
 		g1 = 0;
 		b1 = 0;
@@ -73,7 +73,7 @@ function changeColorScheme(color_scheme){
 		a4 = a2;
 	}
 
-	else if (value == "Google") {
+	else if (value === "Google") {
 		r1 = 214;
 		g1 = 45;
 		b1 = 32;

@@ -56,19 +56,19 @@ var cur_map = 0;
 //CUSTOMIZE MAP TYPE
 function setMapType(map_type) {
 	map.removeLayer(map_list[cur_map]);
-	if (map_type === 'default')  {
+	if (map_type === "default")  {
 		cur_map = 0;
 	}
-	else if (map_type === 'terrain') {
+	else if (map_type === "terrain") {
 		cur_map = 1;
 	}
-	else if (map_type === 'dark') {
+	else if (map_type === "dark") {
 		cur_map = 2;
 	}
-	else if (map_type === 'grayscale') {
+	else if (map_type === "grayscale") {
 		cur_map = 3;
 	}
-	else if (map_type === 'nighttime') {
+	else if (map_type === "nighttime") {
 		cur_map = 4;
 	}
 	map_list[cur_map].addTo(map);
