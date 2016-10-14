@@ -8,14 +8,14 @@ div.accordion.active, div.accordion:hover {
 }
 
 div.accordion:after {
-    content: '\02795';
+    content: '+';
     font-size: 13px;
     float: right;
 	margin: -40px 30px;
 }
 
 div.accordion.active:after {
-    content: "\2796";
+    content: "-";
 }
 
 div.panel {

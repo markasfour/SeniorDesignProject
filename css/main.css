@@ -66,6 +66,7 @@ li {
 	text-shadow: 0 0 3px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8);
 	position: fixed;
+	border-bottom: thick solid rgba(0,0,0,0);
 }
 
 #icon-customize {
@@ -78,7 +79,7 @@ li {
 	text-shadow: 0 0 1px #FFFFFF;
 	position: fixed;
 	background-color: #517fa4;
-	border-radius: 2px;
+	border-radius: 2px;	
 }
 
 #left-panel {
@@ -92,6 +93,7 @@ li {
 	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(81, 127, 164, 0.8);
 	position: fixed;
+	border-right: thick solid rgba(0,0,0,0);
 }
 
 #icon-close-left {
@@ -141,7 +143,8 @@ li {
 	font-size: 16px;
 	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(81, 127, 164, 0.8);
-	position: fixed;
+	position: fixed;a
+	border-left: thick solid rgba(0,0,0,0);
 }
 
 #icon-close-right {
@@ -168,6 +171,7 @@ li {
 	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8); 
 	position: fixed;
+	border-top: thick solid rgba(0,0,0,0);
 }
 
 #icon-about {
