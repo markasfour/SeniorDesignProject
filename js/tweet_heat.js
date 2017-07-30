@@ -146,20 +146,6 @@ tweetheat.filter("reduceByKeyword", function(){
   
 });
 
-//http://stackoverflow.com/questions/18381944/ng-options-and-unique-filter-not-displaying-angular-js/18382680#18382680
-/*tweetheat.filter('unique', function() {
-    return function(input, key) {
-        var unique = {};
-        var uniqueList = [];
-        for(var i = 0; i < input.length; i++){
-            if(typeof unique[input[i][key]] == "undefined"){
-                unique[input[i][key]] = "";
-                uniqueList.push(input[i]);
-            }
-        }
-        return uniqueList;
-    };
-});*/
 
 tweetheat.controller('timeSliderController', ['$scope', '$rootScope',  
                                         function($scope,$rootScope){
@@ -328,7 +314,7 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
   $scope.google_loading = true;
   $scope.twitter_loading = true;
                                           
-  var requestForGoogleData = heatFactory.getGoogleData($http);
+  /*var requestForGoogleData = heatFactory.getGoogleData($http);
   requestForGoogleData.then( function(result) {
     $rootScope.google_data = parseData(result.result);
     $scope.google_loading = false;
@@ -339,8 +325,8 @@ tweetheat.controller('mapController', ['$scope', '$rootScope', '$http', '$q', 'h
     $rootScope.twitter_data = parseData(result.result);
     $scope.twitter_loading = false;
 	});
-  
-                                          
+  */
+
   // watch the loading and changes in selection and min_max
   $rootScope.$watch('[start_date, end_date, selection.length]', function(){
     if(!$scope.twitter_loading)

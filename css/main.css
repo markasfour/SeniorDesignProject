@@ -62,7 +62,7 @@ li {
 	width: 100%;
 	padding: 15px 0 5px;
 	margin: 0 auto;
-	font-size: 30px;
+	font-size: 40px;
 	text-shadow: 0 0 3px #FFFFFF;
 	background-color: rgba(0, 172, 237, 0.8);
 	position: fixed;
@@ -72,7 +72,7 @@ li {
 #icon-customize {
 	cursor: pointer;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
-	margin: 70px 5px 0;
+	margin: 90px 5px 0;
 	padding: 5px;
 	left: 0px;
 	font-size: 16px;
@@ -85,9 +85,9 @@ li {
 #left-panel {
 	width: 300px;
 	height: 100%;
-	left: -320px;
+	left: -330px;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
-	margin: 60px 0; 
+	margin: 80px 0; 
 	padding: 5px 15px 5px 5px;
 	font-size: 16px;
 	text-shadow: 0 0 1px #FFFFFF;
@@ -123,7 +123,7 @@ li {
 #icon-trends {
 	cursor: pointer;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
-	margin: 70px 5px 0;
+	margin: 90px 5px 0;
 	padding: 5px;
 	right: -320px;
 	font-size: 16px;
@@ -138,12 +138,12 @@ li {
 	height: 100%;
 	right: 0px;
 	/*away from top by size of text + 2*shadow size + 2*padding*/
-	margin: 60px 0; 
+	margin: 80px 0; 
 	padding: 5px 15px 5px 5px;
 	font-size: 16px;
 	text-shadow: 0 0 1px #FFFFFF;
 	background-color: rgba(81, 127, 164, 0.8);
-	position: fixed;a
+	position: fixed;
 	border-left: thick solid rgba(0,0,0,0);
 }
 

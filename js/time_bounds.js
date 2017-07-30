@@ -5,7 +5,7 @@ var year = a.getFullYear();
 var month = a.getMonth() + 1;
 var date = a.getDate();
 var earliest_date = year + '-' + month + '-' + date;
-console.log(earliest_date);
+//console.log(earliest_date);
 
 //OLDEST
 var b = new Date();
@@ -14,4 +14,4 @@ var year = b.getFullYear();
 var month = b.getMonth() + 1;
 var date = b.getDate();
 var oldest_date = year + '-' + month + '-' + date;
-console.log(oldest_date);
+//console.log(oldest_date);

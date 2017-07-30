@@ -221,4 +221,4 @@ var states_data_twitter = L.geoJson(TwitterStatesData, {
 });
 geojson = states_data_twitter.addTo(map);
 
-map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+map.attributionControl.addAttribution('Trend data &copy; <a href="http://trends.google.com/">Google</a> and <a href="http://twitter.com/">Twitter</a>');
