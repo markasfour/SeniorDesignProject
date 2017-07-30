@@ -193,38 +193,44 @@ $(document).on('change', '[type=checkbox]', function() {
     trend = trend.replace(/\ /g, '_');
     trend = trend.replace(/\#/g, '');
     var search = '';
-    if(id == 'tw_trend')
-        search = TwitterDataURL + today + trend + '.txt';
-    else if(id == 'g_trend')
-        search = GoogleDataURL + today + trend + '.txt';
+
+    //get twitter data
+    search = TwitterDataURL + today + trend + '.txt';
     $.ajax({ url: search, 
         success: function(data) {
+            if(data == '')
+                return;
             weights = data.split('\n');
-            if(id == 'g_trend'){
-                weights.splice(0,2);
-            }
             for(var i = 0; i < weights.length; i++){
-                if(id =='g_trend'){
-                    var re = new RegExp(states[i], 'g');
-                    if(weights[i].match(re) == null){
-                        weights.splice(i, 0, '0');
-                    }
-                    else {
-                        weights[i] = weights[i].replace(/\D/g, '');
-                        weights[i] = mult_factor * weights[i];
-                    }
+                weights[i] = weights[i].replace(/\D/g, '');
+                weights[i] = mult_factor * weights[i];
+            }
+            setMapData(weights, TwitterStatesData, 'Twitter');
+        },
+        error: function(){
+            alert("Sorry, GTWENDS was unable to retrieve data for this trend :(");
+        }
+    });
+
+    //get google data
+    search = GoogleDataURL + today + trend + '.txt';
+    $.ajax({ url: search, 
+        success: function(data) {
+            if(data == '')
+                return;
+            weights = data.split('\n');
+            weights.splice(0,2);
+            for(var i = 0; i < weights.length; i++){
+                var re = new RegExp(states[i], 'g');
+                if(weights[i].match(re) == null){
+                    weights.splice(i, 0, '0');
                 }
                 else {
                     weights[i] = weights[i].replace(/\D/g, '');
                     weights[i] = mult_factor * weights[i];
                 }
             }
-            if(id == 'tw_trend'){
-                setMapData(weights, TwitterStatesData, 'Twitter');
-            }
-            else if(id == 'g_trend'){
-                setMapData(weights, GoogleStatesData, 'Google');
-            }
+            setMapData(weights, GoogleStatesData, 'Google');
         },
         error: function(){
             alert("Sorry, GTWENDS was unable to retrieve data for this trend :(");
