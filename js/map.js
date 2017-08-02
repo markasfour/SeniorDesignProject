@@ -9,7 +9,9 @@ var map = L.map('mapid', {
 				'zoom': 0,
 				'zoomControl' : false,
 				//'maxBounds': maxBounds
-				}).fitBounds(maxBounds);
+				minZoom: 3,
+                maxZoom: 7 
+                }).fitBounds(maxBounds);
 
 //load all the maps
 //default map
