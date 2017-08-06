@@ -116,6 +116,9 @@ function setMapData(new_weights, mapDensities, source){
     var range = max - min;
 
     if(source == 'Twitter'){
+        max_tw_weight = max;
+        if(max == 0)
+            max_tw_weight = 1;
         d1t = range;
         d2t = (range/ 7) * 6;
         d3t = (range / 7) * 5;

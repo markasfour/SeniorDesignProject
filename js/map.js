@@ -85,24 +85,6 @@ function changeMapType(map_types){
 	setMapType(map_type);
 }
 
-/*
-var info = L.control();
-
-info.onAdd = function (map) {
-	this._div = L.DomUtil.create('div', 'info', document.getElementById('info_container'));
-    
-    this.update();
-	return this._div;
-};
-
-info.update = function (props) {
-	this._div.innerHTML = '<h4>Trend Interest Levels</h4>' +  (props ?
-		'<b>' + props.name + '</b><br/>' + 'Twitter: ' + props.density 
-		: 'Hover over a state');
-};
-
-info.addTo(map);
-*/
 var d1g = 0;
 var d2g = 0;
 var d3g = 0;
@@ -176,6 +158,9 @@ function style2(feature, x) {
 	};
 }
 
+var state_highlighted = 'Hover over a state';
+var max_tw_weight = 1;
+
 function highlightFeature(e) {
 	var layer = e.target;
 
@@ -183,21 +168,46 @@ function highlightFeature(e) {
 		weight: 5,
 		color: '#666',
 		dashArray: '',
-		//fillOpacity: opacity
 	});
 
 	if (!L.Browser.ie && !L.Browser.opera) {
 		layer.bringToFront();
 	}
 
-	info.update(layer.feature.properties);
+    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+                  'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida',
+                  'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 
+                  'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 
+                  'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+                  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+                  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+                  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 
+                  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah',
+                  'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin',
+                  'Wyoming'];
+
+    state_highlighted = layer.feature.properties.name;
+    var state_info = document.getElementById('state');
+    state_info.textContent = state_highlighted;
+    var index = states.indexOf(state_highlighted);
+    var g_info = document.getElementById('g_info');
+    g_info.textContent = 'Google: ' + (GoogleStatesData['features'][index]['properties']['density']).toFixed(2);
+    var tw_info = document.getElementById('tw_info');
+    tw_info.textContent = 'Twitter: ' + ((TwitterStatesData['features'][index]['properties']['density'] / max_tw_weight) * 100).toFixed(2);
 }
 
 var geojson;
 
 function resetHighlight(e) {
 	geojson.resetStyle(e.target);
-	info.update();
+	//info.update();
+    state_highlighted = 'Hover over a state';
+    var state_info = document.getElementById('state');
+    state_info.textContent = state_highlighted;
+    var g_info = document.getElementById('g_info');
+    g_info.textContent = 'Google: ';
+    var tw_info = document.getElementById('tw_info');
+    tw_info.textContent = 'Twitter: ';
 }
 
 function zoomToFeature(e) {

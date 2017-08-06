@@ -15,6 +15,13 @@ hr {
 	background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
 }
 
+hr.dark {
+	border: 0;
+	width: 90%;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(119, 119, 119, 0), rgba(119, 119, 119, 0.75), rgba(119, 119, 119, 0));
+}
+
 li {
 	list-style-type: none;
 	padding: 0;
@@ -80,7 +87,7 @@ li {
 	text-shadow: 0 0 1px #FFFFFF;
 	position: fixed;
 	background-color: #517fa4;
-	border-radius: 2px;	
+	border-radius: 5px;	
 }
 
 #left-panel {
@@ -131,7 +138,7 @@ li {
 	text-shadow: 0 0 1px #FFFFFF;
 	position: fixed;
 	background-color: #517fa4;
-	border-radius: 2px;
+	border-radius: 5px;
 }
 
 #right-panel {
@@ -177,6 +184,7 @@ li {
 }
 
 #icon-about {
+    z-index: 1;
 	cursor: pointer;
 	margin: 70px 5px 0;
 	padding: 5px;
@@ -186,7 +194,7 @@ li {
 	text-shadow: 0 0 1px #FFFFFF;
 	position: fixed;
 	background-color: #517fa4;
-	border-radius: 2px;
+	border-radius: 5px;
 }
 
 #about {
@@ -215,9 +223,15 @@ li {
 }
 
 #info_container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    bottom: 70px;
+    left: 0px;
+    margin: 0 5px;
+    padding: 5px;
+    position: fixed;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    color: #777;
 }
 
 .info {
