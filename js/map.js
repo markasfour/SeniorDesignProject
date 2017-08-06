@@ -21,12 +21,16 @@ var default_map = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 }).addTo(map);
  
 //geographic map
-var terrain_map = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+
+var terrain_map = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+/*var terrain_map = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
 	type: 'sat',
 	ext: 'jpg',
 	attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
 	subdomains: '1234'
-}); 
+}); */
 
 //dark map
 var dark_map = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
@@ -81,25 +85,24 @@ function changeMapType(map_types){
 	setMapType(map_type);
 }
 
+/*
+var info = L.control();
 
-//THIS COLORS THE MAP	
-// control that shows state info on hover
-//var info = L.control();
+info.onAdd = function (map) {
+	this._div = L.DomUtil.create('div', 'info', document.getElementById('info_container'));
+    
+    this.update();
+	return this._div;
+};
 
-//info.onAdd = function (map) {
-//	this._div = L.DomUtil.create('div', 'info');
-//	this.update();
-//	return this._div;
-//};
+info.update = function (props) {
+	this._div.innerHTML = '<h4>Trend Interest Levels</h4>' +  (props ?
+		'<b>' + props.name + '</b><br/>' + 'Twitter: ' + props.density 
+		: 'Hover over a state');
+};
 
-//info.update = function (props) {
-//	this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-//		'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-//		: 'Hover over a state');
-//};
-
-//info.addTo(map);
-
+info.addTo(map);
+*/
 var d1g = 0;
 var d2g = 0;
 var d3g = 0;
@@ -187,14 +190,14 @@ function highlightFeature(e) {
 		layer.bringToFront();
 	}
 
-//	info.update(layer.feature.properties);
+	info.update(layer.feature.properties);
 }
 
 var geojson;
 
 function resetHighlight(e) {
 	geojson.resetStyle(e.target);
-//	info.update();
+	info.update();
 }
 
 function zoomToFeature(e) {

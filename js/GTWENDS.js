@@ -31,6 +31,8 @@ function getGoogleTrends(){
     $.ajax({ url: search, 
         success: function(data) {
             google_trends = data.split("\n");
+            if(google_trends[google_trends.length - 1] == '')
+                google_trends.pop();
             var google_trends_display_list = $('#google_trends_list');
                 $.each(google_trends, function(i)
                         {
@@ -65,6 +67,8 @@ function getTwitterTrends(){
     $.ajax({ url: search, 
         success: function(data) {
             twitter_trends = data.split("\n");
+            if(twitter_trends[twitter_trends.length - 1] == '')
+                twitter_trends.pop();
             var twitter_trends_display_list = $('#twitter_trends_list');
             $.each(twitter_trends, function(i)
                     {
@@ -92,17 +96,6 @@ function getTwitterTrends(){
     });
 }
 
-function checkTrendLists(){
-    var TwitterTrendsList = $('#twitter_trends_list li');
-    var GoogleTrendsList = $('#google_trends_list li');
-
-    if(TwitterTrendsList.length == 0){
-        getTwitterTrends();
-    }
-    if(GoogleTrendsList.length == 0){
-        getGoogleTrends();
-    }
-}
 
 function setMapData(new_weights, mapDensities, source){
     var max = 0;
@@ -162,15 +155,17 @@ function setMapData(new_weights, mapDensities, source){
 
 
 //Main Processing
-var ready = false;
+$("#loading-background").show();
+$("#loading-symbol").show();
 var today = getDate();
 getTwitterTrends();
 getGoogleTrends();
-checkTrendLists();
-ready = true;
+$("#loading-background").hide();
+$("#loading-symbol").hide();
 
 //handle trend checkboxes 
 $(document).on('change', '[type=checkbox]', function() {
+
     var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
                   'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida',
                   'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 
@@ -193,6 +188,10 @@ $(document).on('change', '[type=checkbox]', function() {
     trend = trend.replace(/\ /g, '_');
     trend = trend.replace(/\#/g, '');
     var search = '';
+
+
+    $("#loading-background").show();
+    $("#loading-symbol").show();
 
     //get twitter data
     search = TwitterDataURL + today + trend + '.txt';
@@ -236,5 +235,8 @@ $(document).on('change', '[type=checkbox]', function() {
             alert("Sorry, GTWENDS was unable to retrieve data for this trend :(");
         }
     });
+
+    $("#loading-background").hide();
+    $("#loading-symbol").hide();
 });
 
