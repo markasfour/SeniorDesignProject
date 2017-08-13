@@ -4,15 +4,24 @@ window.mobileAndTabletcheck = function() {
   return check;
 };
 
+var mobile_clicked = false;
+
 window.onresize = function (event) {
-    if(window.mobileAndTabletcheck){
-        if(window.innerHeight > window.innerWidth){
-            $("#mobile").show();
-        }
-        else{
-            $("#mobile").hide();
+    if(mobile_clicked == false){
+        if(window.mobileAndTabletcheck){
+            if(window.innerHeight > window.innerWidth){
+                $("#mobile").show();
+            }
+            else{
+                $("#mobile").hide();
+            }
         }
     }
+}
+
+function mobile_button_click() {
+    mobile_clicked = true;
+    $("#mobile").hide();
 }
 
 if(window.mobileAndTabletcheck){
