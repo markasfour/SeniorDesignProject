@@ -16,18 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/>
 	<link rel="stylesheet" type="text/css" href="css/nouislider.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/accordion.css"/> 
-	
-	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
 
-	<!-- Angular -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.min.js"></script> <!--For making rest calls-->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.5/angular-filter.min.js"></script> <!-- filtering -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-animate.min.js"></script> <!-- ng-shyow/ng-hide -->
-  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/2.14.0/rzslider.min.js"></script>
-  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+    <!--JQUERY-->
+	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
 
 	<!--MAP-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
@@ -40,7 +31,12 @@
 	<script src="js/time_bounds.js" type="text/javascript"></script>
 </head>
 
-<body>	
+<body>
+    <!--MOBILE-->
+    <div id="mobile">
+
+    </div>
+
 	<!--MAP-->
 	<div id="mapid"></div>
     <script type="text/javascript" src="js/map.js"></script>
@@ -66,45 +62,70 @@
 			<i class="fa fa-close"></i>
 		</div>
 		Customize Options
-		<hr>
-		Change Map Style
-		<form name="map_types" onChange="changeMapType(map_types)">
-			<input type="radio" name="map" value="default" checked> Default<br>
-  	  	  	<input type="radio" name="map" value="terrain"> Terrain<br>
-  	  	  	<input type="radio" name="map" value="dark"> Dark<br> 
-  	  	  	<input type="radio" name="map" value="grayscale"> Grayscale<br>
-			<input type="radio" name="map" value="nighttime"> Night Time 
-		</form>
-		<hr>
-		Change Site Color Scheme
-		<form name="color_scheme" onChange="changeColorScheme(color_scheme)">
-			<input type="radio" name="colors" value="default" checked> Twitter 
-				<font color=#00aced><i class="fa fa-square" aria-hidden="true"></i></font>
-				<font color=#517fa4><i class="fa fa-square" aria-hidden="true"></i></font>
-				<br>
-            <input type="radio" name="colors" value="Google"> Google
-				<font color=#d62d20><i class="fa fa-square" aria-hidden="true"></i></font>
-				<font color=#ffa700><i class="fa fa-square" aria-hidden="true"></i></font>
-				<font color=#008744><i class="fa fa-square" aria-hidden="true"></i></font>
-				<font color=#0057e7><i class="fa fa-square" aria-hidden="true"></i></font>
+        <hr>
+        <div id="customize_accordion">
+            <div class="accordion" style="text-align: center; background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));">
+                <hr>
                 <br>
-			<input type="radio" name="colors" value="dark"> Dark
-				<font color=#000000><i class="fa fa-square" aria-hidden="true"></i></font>
-				<font color=#191919><i class="fa fa-square" aria-hidden="true"></i></font>
-				<br>
-			
-		</form>
-		<hr>
-		Edit Map Opacity<br>
-			<br>
-			Google Data Opacity: <i id="opacity-range-value-google"></i>
-			<div id="opacity-range-google"></div>
-			
-			<br>
-			<br>	
-			Twitter Data Opacity: <i id="opacity-range-value-twitter"></i>
-			<div id="opacity-range-twitter"></div>
-		<hr>
+                <div id="customize_accordion">Change Map Style</div>
+                <br>
+                <hr>
+            </div>
+            <div class="panel" style="overflow-y: initial;">
+                <form name="map_types" onChange="changeMapType(map_types)">
+                    <input type="radio" name="map" value="default" checked> Default<br>
+                    <input type="radio" name="map" value="terrain"> Terrain<br>
+                    <input type="radio" name="map" value="dark"> Dark<br> 
+                    <input type="radio" name="map" value="grayscale"> Grayscale<br>
+                    <input type="radio" name="map" value="nighttime"> Night Time 
+                </form>
+            </div>
+        </div>
+        <div id="customize_accordion">
+            <div class="accordion" style="text-align: center; background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));">
+                <hr>
+                <br>
+                <div id="customize_accordion">Change Site Color Scheme</div>
+                <br>
+                <hr>
+            </div>
+            <div class="panel" style="overflow-y: initial;">
+                <form name="color_scheme" onChange="changeColorScheme(color_scheme)">
+                    <input type="radio" name="colors" value="default" checked> Twitter 
+                        <font color=#00aced><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <font color=#517fa4><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <br>
+                    <input type="radio" name="colors" value="Google"> Google
+                        <font color=#d62d20><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <font color=#ffa700><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <font color=#008744><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <font color=#0057e7><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <br>
+                    <input type="radio" name="colors" value="dark"> Dark
+                        <font color=#000000><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <font color=#191919><i class="fa fa-square" aria-hidden="true"></i></font>
+                        <br>
+                    
+                </form>
+            </div>
+        </div>
+        <div id="customize_accordion">
+            <div class="accordion" style="text-align: center; background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0, 0.1), rgba(0,0,0,0));">
+                <hr>
+                <br>
+                <div id="customize_accordion">Edit Map Opacity</div>
+                <br>
+                <hr>
+            </div>
+            <div class="panel" style="overflow-y: initial;">
+                <br>
+                Google Data Opacity: <i id="opacity-range-value-google"></i>
+                <div id="opacity-range-google"></div>
+                <br>	
+                Twitter Data Opacity: <i id="opacity-range-value-twitter"></i>
+                <div id="opacity-range-twitter"></div>
+            </div>
+        </div>
 		Toggle Border
 		<div id="border-toggle"></div>
 	</div>

@@ -23,7 +23,7 @@ var default_map = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 //geographic map
 
 var terrain_map = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            attribution: 'Tiles &copy; Esri'
 });
 /*var terrain_map = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
 	type: 'sat',
@@ -42,12 +42,12 @@ var dark_map = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y
 //grayscale map
 var grayscale_map = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
 	maxZoom: 19,
-	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	attribution: '<a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a>'
 });
 
 //night time map
 var night_map = L.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
-	attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+	attribution: 'NASA/GSFC/<a href="https://earthdata.nasa.gov">ESDIS</a>',
 	bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
 	minZoom: 1,
 	maxZoom: 8,
@@ -218,7 +218,7 @@ function onEachFeature(feature, layer) {
 	layer.on({
 		mouseover: highlightFeature,
 		mouseout: resetHighlight,
-		click: zoomToFeature
+		click: highlightFeature //zoomToFeature
 	});
 }
 
