@@ -155,8 +155,6 @@ function setMapData(new_weights, mapDensities, source){
         
 }
 
-
-
 //Main Processing
 $("#loading-background").show();
 $("#loading-symbol").show();

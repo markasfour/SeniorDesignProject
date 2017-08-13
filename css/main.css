@@ -58,6 +58,17 @@ li {
 
 
 /* IDS */
+#mobile {
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    font-size: 250px;
+    z-index: 1;
+}
+
 #mapid {
 	width: 100%;
 	height: 100%;
@@ -236,7 +247,7 @@ li {
 }
 
 #info_container {
-    bottom: 70px;
+    bottom: 50px;
     left: 0px;
     margin: 0 5px;
     padding: 5px;
