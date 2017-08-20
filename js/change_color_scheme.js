@@ -153,9 +153,9 @@ function changeColorScheme(color_scheme){
 
 		document.getElementById("icon-trends").style.backgroundColor = 'rgb(' + r4 + ',' + g4 + ',' + b4 + ')';
 
-		document.getElementById("icon-about").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
+		document.getElementById("icon-about").style.backgroundColor = 'rgb(' + r3 + ',' + g3 + ',' + b3 + ')';
 
-		document.getElementById("about").style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
+		document.getElementById("about").style.backgroundColor = '#343d46';
 
 	}
 }

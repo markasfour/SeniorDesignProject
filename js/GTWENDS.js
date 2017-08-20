@@ -4,6 +4,8 @@ var GoogleTrendsURL = baseURL + "/Google_Trends/"
 var TwitterTrendsURL = baseURL + "/Twitter_Trends/"
 var GoogleDataURL = baseURL + "/Google_Data/"
 var TwitterDataURL = baseURL + "/Twitter_Data/"
+var GoogleLinkURL = "https://trends.google.com/trends/explore?q=";
+var TwitterLinkURL = "https://twitter.com/search?q=";
 //console.log("urls are ", GoogleTrendsURL, TwitterTrendsURL, GoogleDataURL, TwitterDataURL);
 
 //Functions
@@ -23,6 +25,8 @@ function getDate(){
 
     return yyyy + '-' + mm + '-' + dd;
 }
+
+var retry_g = true;
 
 function getGoogleTrends(){
     var search = GoogleTrendsURL + today + "google.txt";
@@ -55,10 +59,20 @@ function getGoogleTrends(){
                         });
         },
         error: function() {
-            alert("Sorry, GTWENDS was unable to retrieve Google trends :(");
+            if(retry_g){
+                retry_g = false;
+                var d = new Date();
+                d.setDate(d.getDate() - 1);
+                today = d;
+                getGoogleTrends();
+            }
+            else
+                alert("Sorry, GTWENDS was unable to retrieve Google trends :(");
         }
     });
 }
+
+var retry_t = true;
 
 function getTwitterTrends(){
     var search = TwitterTrendsURL + today + "twitter.txt";
@@ -91,7 +105,15 @@ function getTwitterTrends(){
                     });
         },
         error: function() {
-            alert("Sorry, GTWENDS was unable to retrieve Twitter trends :(");
+            if(retry_t){
+                retry_t = false;
+                var d = new Date();
+                d.setDate(d.getDate() - 1);
+                today = d;
+                getTwitterTrends();
+            }
+            else
+                alert("Sorry, GTWENDS was unable to retrieve Twitter trends :(");
         }
     });
 }
@@ -186,6 +208,27 @@ $(document).on('change', '[type=checkbox]', function() {
     if(check == false){
         mult_factor = -1;
     }
+
+    var trend_name = document.getElementById('trend_name');
+    var g_link = document.getElementById('g_link');
+    var tw_link = document.getElementById('tw_link');
+    if(check){
+        trend_name.textContent = trend;
+        var trend_uri = encodeURI(trend);
+        trend_uri = trend_uri.replace(/\#/g, '%23');
+        g_link.href= GoogleLinkURL + trend_uri;
+        g_link.innerHTML = "explore <i class='fa fa-external-link' aria-hidden='true'></i>";
+        tw_link.href = TwitterLinkURL + trend_uri;
+        tw_link.innerHTML = "explore <i class='fa fa-external-link' aria-hidden='true'></i>";
+    }
+    else{
+        trend_name.textContent = "Select a trend";
+        g_link.href = "";
+        g_link.innerHTML = "";
+        tw_link.href = "";
+        tw_link.innerHTML = "";
+    }
+
     trend = trend.replace(/\ /g, '_');
     trend = trend.replace(/\#/g, '');
     var search = '';
@@ -205,7 +248,7 @@ $(document).on('change', '[type=checkbox]', function() {
                 weights[i] = weights[i].replace(/\D/g, '');
                 weights[i] = mult_factor * weights[i];
             }
-            setMapData(weights, TwitterStatesData, 'Twitter');
+            setMapData(weights, TwitterStatesData, 'Twitter'); 
         },
         error: function(){
             alert("Sorry, GTWENDS was unable to retrieve data for this trend :(");

@@ -191,9 +191,9 @@ function highlightFeature(e) {
     state_info.textContent = state_highlighted;
     var index = states.indexOf(state_highlighted);
     var g_info = document.getElementById('g_info');
-    g_info.textContent = 'Google: ' + (GoogleStatesData['features'][index]['properties']['density']).toFixed(2);
+    g_info.textContent = ': ' + (GoogleStatesData['features'][index]['properties']['density']);
     var tw_info = document.getElementById('tw_info');
-    tw_info.textContent = 'Twitter: ' + ((TwitterStatesData['features'][index]['properties']['density'] / max_tw_weight) * 100).toFixed(2);
+    tw_info.textContent = ': ' + ((TwitterStatesData['features'][index]['properties']['density'] / max_tw_weight) * 100).toFixed(2);
 }
 
 var geojson;
@@ -205,9 +205,9 @@ function resetHighlight(e) {
     var state_info = document.getElementById('state');
     state_info.textContent = state_highlighted;
     var g_info = document.getElementById('g_info');
-    g_info.textContent = 'Google: ';
+    g_info.textContent = ': ';
     var tw_info = document.getElementById('tw_info');
-    tw_info.textContent = 'Twitter: ';
+    tw_info.textContent = ': ';
 }
 
 function zoomToFeature(e) {
