@@ -247,6 +247,19 @@ li {
 	font-size: 24px;
 }
 
+.slide_content {
+    background: rgba(255,255,255,.5);
+    border-radius: 5px;
+    text-align: center;
+    text-shadow: 0 0 2px #777;
+    padding: 15px;
+    color: #777;
+}
+
+.slide_content > p{
+   font-size: 20px; 
+}
+
 #link_container{
     bottom: 150px;
     left: 0px;

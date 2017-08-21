@@ -26,6 +26,25 @@ function getDate(){
     return yyyy + '-' + mm + '-' + dd;
 }
 
+function getYesterday(){
+    var t = new Date();
+    var y = new Date(t);
+    y.setDate(t.getDate() - 1);
+    var dd = y.getDate();
+    var mm = y.getMonth()+1;
+    var yyyy = y.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd;
+    }
+
+    if(mm<10) {
+        mm = '0'+mm;
+    }
+
+    return yyyy + '-' + mm + '-' + dd;
+}
+
 var retry_g = true;
 
 function getGoogleTrends(){
@@ -61,9 +80,7 @@ function getGoogleTrends(){
         error: function() {
             if(retry_g){
                 retry_g = false;
-                var d = new Date();
-                d.setDate(d.getDate() - 1);
-                today = d;
+                today = yesterday;
                 getGoogleTrends();
             }
             else
@@ -107,9 +124,7 @@ function getTwitterTrends(){
         error: function() {
             if(retry_t){
                 retry_t = false;
-                var d = new Date();
-                d.setDate(d.getDate() - 1);
-                today = d;
+                today = yesterday;
                 getTwitterTrends();
             }
             else
@@ -181,6 +196,7 @@ function setMapData(new_weights, mapDensities, source){
 $("#loading-background").show();
 $("#loading-symbol").show();
 var today = getDate();
+var yesterday = getYesterday();
 getTwitterTrends();
 getGoogleTrends();
 $("#loading-background").hide();
